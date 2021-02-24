@@ -1,6 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:olx_parser/model/parsed_data.dart';
-import 'package:olx_parser/parser_repository.dart';
+import 'package:olx_parser/repository/olx_repository.dart';
+import 'package:olx_parser/repository/parser_repository.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 void main() {
@@ -12,7 +14,7 @@ class ParserApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.green,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: HomePage(),
@@ -28,8 +30,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final ParserRepository _parserRepository = ParserRepository();
-
+  final OlxRepository _olxRepository = OlxRepository();
   ParsedDataSource _parsedDataSource;
 
   @override
@@ -47,7 +48,22 @@ class _HomePageState extends State<HomePage> {
       ),
       body: SfDataGrid(
         source: _parsedDataSource,
+        cellBuilder: (BuildContext context, GridColumn column, int rowindex) {
+          if (column.mappingName != "image") {
+            return Text("Ақпарат жоқ");
+          }
+
+          return CachedNetworkImage(
+            imageUrl:
+                "https://frankfurt.apollo.olxcdn.com/v1/files/qvbw0gicn2be1-KZ/image;s=644x461",
+          );
+        },
         columns: [
+          GridWidgetColumn(
+            mappingName: "image",
+            headerText: "Суреті",
+            padding: const EdgeInsets.all(10.0),
+          ),
           GridTextColumn(
             mappingName: 'name',
             headerText: 'Аты',
@@ -64,7 +80,18 @@ class _HomePageState extends State<HomePage> {
             mappingName: 'sellerName',
             headerText: 'Сатушы',
           ),
+          GridTextColumn(
+            mappingName: 'offerUrl',
+            headerText: 'Сілтеме',
+          ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.get_app),
+        onPressed: () => _olxRepository.getOfferList(
+          url:
+              "https://www.olx.kz/kk/elektronika/kompyutery-i-komplektuyuschie/",
+        ),
       ),
     );
   }

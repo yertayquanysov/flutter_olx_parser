@@ -12,6 +12,7 @@ dependencies:
   html: ^0.14.0+4
   http: ^0.12.2
   syncfusion_flutter_datagrid: ^18.4.43-beta
+  cached_network_image: ^2.5.0
 
 dev_dependencies:
   flutter_test:

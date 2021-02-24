@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:olx_parser/olx_repository.dart';
+import 'package:olx_parser/repository/olx_repository.dart';
 
 void main() {
   final OlxRepository olx = OlxRepository();

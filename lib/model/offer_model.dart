@@ -18,10 +18,9 @@ class OfferModel {
 
   static formDocument(dataHtml.Element data) {
     try {
-      String offerName = data.getElementsByTagName("strong")[0].text;
 
-      String offerImage =
-          data.getElementsByTagName("img")[0].attributes.values.elementAt(1);
+      String offerName = data.getElementsByTagName("strong")[0].text;
+      String offerImage = data.getElementsByTagName("img")[0].attributes.values.elementAt(1);
 
       return OfferModel(name: offerName, image: offerImage);
     } catch (e) {
