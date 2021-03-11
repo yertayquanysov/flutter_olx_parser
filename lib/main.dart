@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:olx_parser/model/parsed_data.dart';
 import 'package:olx_parser/repository/olx_repository.dart';
-import 'package:olx_parser/repository/parser_repository.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 void main() {
@@ -14,7 +13,7 @@ class ParserApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        primarySwatch: Colors.green,
+        primaryColor: Colors.redAccent,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: HomePage(),
@@ -54,19 +53,19 @@ class _HomePageState extends State<HomePage> {
           }
 
           return CachedNetworkImage(
-            imageUrl:
-                "https://frankfurt.apollo.olxcdn.com/v1/files/qvbw0gicn2be1-KZ/image;s=644x461",
+            fit: BoxFit.cover,
+            imageUrl: _parsedDataSource.adsList[rowindex].imageUrl,
           );
         },
         columns: [
-          GridWidgetColumn(
-            mappingName: "image",
-            headerText: "Суреті",
-            padding: const EdgeInsets.all(10.0),
-          ),
           GridTextColumn(
             mappingName: 'name',
             headerText: 'Аты',
+          ),
+          GridWidgetColumn(
+            mappingName: "image",
+            headerText: "Суреті",
+            padding: const EdgeInsets.all(8.0),
           ),
           GridTextColumn(
             mappingName: 'price',

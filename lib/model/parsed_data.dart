@@ -43,24 +43,32 @@ class ParsedDataSource extends DataGridSource<ParsedData> {
     ParsedData(
       name: "Телефон сатылады",
       price: "8700 тг",
+      imageUrl:
+          "https://cdn.pixabay.com/photo/2021/02/03/17/36/river-5978743_960_720.jpg",
       phoneNumber: "8 705 895 86 92",
       sellerName: "Ertai",
     ),
     ParsedData(
       name: "Телефон сатылады",
       price: "8700 тг",
+      imageUrl:
+          "https://cdn.pixabay.com/photo/2021/02/03/17/36/river-5978743_960_720.jpg",
       phoneNumber: "8 705 895 86 92",
       sellerName: "Ertai",
     ),
     ParsedData(
       name: "Телефон сатылады",
       price: "8700 тг",
+      imageUrl:
+          "https://cdn.pixabay.com/photo/2021/02/03/17/36/river-5978743_960_720.jpg",
       phoneNumber: "8 705 895 86 92",
       sellerName: "Ertai",
     ),
     ParsedData(
       name: "Телефон сатылады",
       price: "8700 тг",
+      imageUrl:
+          "https://cdn.pixabay.com/photo/2021/02/03/17/36/river-5978743_960_720.jpg",
       phoneNumber: "8 705 895 86 92",
       sellerName: "Ertai",
     ),
