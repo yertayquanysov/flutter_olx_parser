@@ -1,7 +1,15 @@
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:html/dom.dart';
+import 'package:html/parser.dart';
+import 'package:olx_parser/repository/html_parser_repository.dart';
 import 'package:olx_parser/repository/olx_repository.dart';
 
 void main() {
+  setUpAll(() {
+    TestWidgetsFlutterBinding.ensureInitialized();
+  });
+
   final OlxRepository olx = OlxRepository();
 
   test("test parse product id", () async {
@@ -27,11 +35,33 @@ void main() {
   });
 
   test("test parse phone number", () async {
-
     await olx.getPhoneNumber(
       "https://www.olx.kz/kk/obyavlenie/repetitor-russkiy-yazyk-i-matematika-IDjYwlT.html#06f3abb167;promoted",
     );
 
     expect(1, 1);
+  });
+
+  test("test html data parser", () async {
+    final testHtmlFile = await rootBundle.loadString("assets/test_item_data");
+    final Document document = parse(testHtmlFile);
+
+    final HtmlParserRepository _htmlParserRepository =
+        HtmlParserRepository(document.body);
+
+    expect("Продам лазерный ч/б принтер HP LaserJet P2055d",
+        _htmlParserRepository.getName());
+
+    expect("35 000 тг.", _htmlParserRepository.getPrice());
+    expect(
+        "https://frankfurt.apollo.olxcdn.com:443/v1/files/p660j0hswb9c3-KZ/image;s=644x461",
+        _htmlParserRepository.getImageUrl());
+    expect("Алматы, Алмалинский район", _htmlParserRepository.getCityName());
+
+    expect("Компьютерлер » Қосалқы құрылғылар",
+        _htmlParserRepository.getCategoryName());
+
+    expect("https://www.olx.kz/kk/obyavlenie/prodam-lazernyy-ch-b-printer-hp-laserjet-p2055d-IDh8TjV.html#f9f01ff837;promoted",
+        _htmlParserRepository.getAdsLink());
   });
 }

@@ -1,4 +1,6 @@
-import 'package:syncfusion_flutter_datagrid/datagrid.dart';
+import 'package:html/dom.dart' as dataHtml;
+import 'package:olx_parser/repository/html_parser_repository.dart';
+import 'package:olx_parser/repository/olx_repository.dart';
 
 class ParsedData {
   final String name;
@@ -36,58 +38,26 @@ class ParsedData {
       "categoryName": categoryName,
     };
   }
-}
 
-class ParsedDataSource extends DataGridSource<ParsedData> {
-  final List<ParsedData> adsList = [
-    ParsedData(
-      name: "Телефон сатылады",
-      price: "8700 тг",
-      imageUrl:
-          "https://cdn.pixabay.com/photo/2021/02/03/17/36/river-5978743_960_720.jpg",
-      phoneNumber: "8 705 895 86 92",
-      sellerName: "Ertai",
-    ),
-    ParsedData(
-      name: "Телефон сатылады",
-      price: "8700 тг",
-      imageUrl:
-          "https://cdn.pixabay.com/photo/2021/02/03/17/36/river-5978743_960_720.jpg",
-      phoneNumber: "8 705 895 86 92",
-      sellerName: "Ertai",
-    ),
-    ParsedData(
-      name: "Телефон сатылады",
-      price: "8700 тг",
-      imageUrl:
-          "https://cdn.pixabay.com/photo/2021/02/03/17/36/river-5978743_960_720.jpg",
-      phoneNumber: "8 705 895 86 92",
-      sellerName: "Ertai",
-    ),
-    ParsedData(
-      name: "Телефон сатылады",
-      price: "8700 тг",
-      imageUrl:
-          "https://cdn.pixabay.com/photo/2021/02/03/17/36/river-5978743_960_720.jpg",
-      phoneNumber: "8 705 895 86 92",
-      sellerName: "Ertai",
-    ),
-  ];
+  static formDocument(dataHtml.Element data) async {
 
-  @override
-  List<ParsedData> get dataSource => adsList;
+    final _parser = HtmlParserRepository(data);
+    final _olxParser = OlxRepository();
 
-  @override
-  bool shouldRecalculateColumnWidths() {
-    return true;
-  }
+    final phoneNumber = await _olxParser.getPhoneNumber(_parser.getAdsLink());
 
-  @override
-  getValue(ParsedData data, String columnName) {
     try {
-      return data.toDocument()[columnName];
+      return ParsedData(
+        name: _parser.getName(),
+        imageUrl: _parser.getImageUrl(),
+        price: _parser.getPrice(),
+        city: _parser.getCityName(),
+        categoryName: _parser.getCategoryName(),
+        phoneNumber: phoneNumber,
+        offerUrl: _parser.getAdsLink(),
+      );
     } catch (e) {
-      return "";
+      return ParsedData(name: e.toString(), imageUrl: "");
     }
   }
 }

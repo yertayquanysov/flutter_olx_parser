@@ -1,10 +1,13 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:olx_parser/model/parsed_data.dart';
 import 'package:olx_parser/repository/olx_repository.dart';
-import 'package:syncfusion_flutter_datagrid/datagrid.dart';
+import 'package:olx_parser/ui/components/parsed_data_table.dart';
 
-void main() {
+import 'model/data_source.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(ParserApp());
 }
 
@@ -29,68 +32,35 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final ParsedDataSource _parsedDataSource = ParsedDataSource();
   final OlxRepository _olxRepository = OlxRepository();
-  ParsedDataSource _parsedDataSource;
 
   @override
   void initState() {
     super.initState();
-
-    _parsedDataSource = ParsedDataSource();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("OLX"),
+        title: const Text("OLX парсер"),
       ),
-      body: SfDataGrid(
-        source: _parsedDataSource,
-        cellBuilder: (BuildContext context, GridColumn column, int rowindex) {
-          if (column.mappingName != "image") {
-            return Text("Ақпарат жоқ");
-          }
-
-          return CachedNetworkImage(
-            fit: BoxFit.cover,
-            imageUrl: _parsedDataSource.adsList[rowindex].imageUrl,
-          );
-        },
-        columns: [
-          GridTextColumn(
-            mappingName: 'name',
-            headerText: 'Аты',
-          ),
-          GridWidgetColumn(
-            mappingName: "image",
-            headerText: "Суреті",
-            padding: const EdgeInsets.all(8.0),
-          ),
-          GridTextColumn(
-            mappingName: 'price',
-            headerText: 'Бағасы',
-          ),
-          GridTextColumn(
-            mappingName: 'phoneNumber',
-            headerText: 'Телефон номер',
-          ),
-          GridTextColumn(
-            mappingName: 'sellerName',
-            headerText: 'Сатушы',
-          ),
-          GridTextColumn(
-            mappingName: 'offerUrl',
-            headerText: 'Сілтеме',
-          ),
-        ],
+      body: ParsedDataTable(
+        parsedDataSource: _parsedDataSource,
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.get_app),
-        onPressed: () => _olxRepository.getOfferList(
-          url:
-              "https://www.olx.kz/kk/elektronika/kompyutery-i-komplektuyuschie/",
-        ),
+        onPressed: () {
+          _olxRepository
+              .getAdsList(
+                  url:
+                      "https://www.olx.kz/kk/elektronika/kompyutery-i-komplektuyuschie/")
+              .listen((event) {
+            _parsedDataSource.adsList.add(event);
+            _parsedDataSource.notifyListeners();
+          });
+        },
       ),
     );
   }

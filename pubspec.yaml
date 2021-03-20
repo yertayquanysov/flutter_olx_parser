@@ -13,6 +13,7 @@ dependencies:
   http: ^0.12.2
   syncfusion_flutter_datagrid: ^18.4.43-beta
   cached_network_image: ^2.5.0
+  flutter_bloc: ^6.1.3
 
 dev_dependencies:
   flutter_test:
@@ -21,3 +22,5 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/test_item_data

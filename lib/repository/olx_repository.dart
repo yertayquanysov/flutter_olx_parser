@@ -6,7 +6,7 @@ import 'package:html/parser.dart';
 import 'package:http/http.dart' as http;
 import 'package:olx_parser/const.dart';
 import 'package:olx_parser/model/cache.dart';
-import 'package:olx_parser/model/offer_model.dart';
+import 'package:olx_parser/model/parsed_data.dart';
 
 abstract class IOlxRepository {}
 
@@ -65,17 +65,16 @@ class OlxRepository implements IOlxRepository {
     }
   }
 
-  Future<List<OfferModel>> getOfferList({@required url}) async {
+  Stream<ParsedData> getAdsList({@required url}) async* {
+    print("Start");
+
     final String htmlData = await getPageHTML(url);
     final Document document = parse(htmlData);
 
-    var result = document
-        .getElementsByClassName("offer-wrapper")
-        .map<OfferModel>((e) => OfferModel.formDocument(e))
-        .toList();
+    final adsList = document.getElementsByClassName("offer-wrapper").toList();
 
-    print(result);
-
-    return result;
+    for (int a = 0; a < adsList.length; a++) {
+      yield await ParsedData.formDocument(adsList[a]);
+    }
   }
 }
