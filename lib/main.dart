@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:olx_parser/model/parsed_data.dart';
 import 'package:olx_parser/repository/olx_repository.dart';
 import 'package:olx_parser/ui/components/parsed_data_table.dart';
+import 'package:superellipse_shape/superellipse_shape.dart';
 
 import 'model/data_source.dart';
 
@@ -43,13 +44,43 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("OLX парсер"),
+        elevation: 3,
+        toolbarHeight: 50,
       ),
       body: Column(
         children: [
-          TextField(onChanged: (v) => _parseDataUrl),
+          Padding(
+            padding: const EdgeInsets.only(
+              right: 10,
+              left: 10,
+              top: 18,
+              bottom: 8,
+            ),
+            child: TextField(
+              onChanged: (v) => _parseDataUrl,
+              decoration: InputDecoration(
+                hintText: "Olx url",
+                contentPadding: const EdgeInsets.only(
+                  right: 18,
+                  left: 18,
+                  top: 5,
+                  bottom: 5,
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide(width: 3),
+                ),
+              ),
+            ),
+          ),
           MaterialButton(
-            child: Text("Parse"),
+            child: const Text("Начат"),
+            color: Colors.redAccent,
+            textColor: Colors.white,
             onPressed: startParseData,
+            shape: SuperellipseShape(
+              borderRadius: BorderRadius.circular(10),
+            ),
           ),
           Expanded(
             child: ParsedDataTable(

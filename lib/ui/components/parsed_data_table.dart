@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:olx_parser/model/data_source.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
@@ -14,40 +13,36 @@ class ParsedDataTable extends StatelessWidget {
   Widget build(BuildContext context) {
     return SfDataGrid(
       source: parsedDataSource,
+      columnWidthMode: ColumnWidthMode.fill,
       rowHeight: 100,
       columns: [
         GridTextColumn(
           mappingName: 'name',
           headerText: 'Аты',
         ),
-        GridWidgetColumn(
-          mappingName: "image",
-          headerText: "Суреті",
-          padding: const EdgeInsets.all(18.0),
-        ),
-        GridWidgetColumn(
+        GridTextColumn(
           mappingName: "city",
           headerText: "Қала",
           padding: const EdgeInsets.all(18.0),
         ),
-        GridWidgetColumn(
+        GridTextColumn(
           mappingName: "date",
           headerText: "Күні",
           padding: const EdgeInsets.all(18.0),
         ),
-        GridWidgetColumn(
-          mappingName: "categoryName",
-          headerText: "Санат",
+        GridTextColumn(
+          mappingName: "price",
+          headerText: "Бағасы",
           padding: const EdgeInsets.all(18.0),
         ),
-        GridWidgetColumn(
+        GridTextColumn(
           mappingName: "sellerName",
           headerText: "Сатушы",
           padding: const EdgeInsets.all(18.0),
         ),
         GridTextColumn(
-          mappingName: 'price',
-          headerText: 'Бағасы',
+          mappingName: 'categoryName',
+          headerText: 'Санат',
         ),
         GridTextColumn(
           mappingName: 'phoneNumber',
