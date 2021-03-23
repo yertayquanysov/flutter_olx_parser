@@ -25,7 +25,7 @@ class ParserApp extends StatelessWidget {
 }
 
 class HomePage extends StatefulWidget {
-  HomePage({Key key}) : super(key: key);
+  HomePage({Key? key}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -35,10 +35,8 @@ class _HomePageState extends State<HomePage> {
   final ParsedDataSource _parsedDataSource = ParsedDataSource();
   final OlxRepository _olxRepository = OlxRepository();
 
-  @override
-  void initState() {
-    super.initState();
-  }
+  String _parseDataUrl =
+      "https://www.olx.kz/kk/elektronika/kompyutery-i-komplektuyuschie/";
 
   @override
   Widget build(BuildContext context) {
@@ -46,22 +44,39 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: const Text("OLX парсер"),
       ),
-      body: ParsedDataTable(
-        parsedDataSource: _parsedDataSource,
+      body: Column(
+        children: [
+          TextField(onChanged: (v) => _parseDataUrl),
+          MaterialButton(
+            child: Text("Parse"),
+            onPressed: startParseData,
+          ),
+          Expanded(
+            child: ParsedDataTable(
+              parsedDataSource: _parsedDataSource,
+            ),
+          ),
+        ],
       ),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.get_app),
-        onPressed: () {
-          _olxRepository
-              .getAdsList(
-                  url:
-                      "https://www.olx.kz/kk/elektronika/kompyutery-i-komplektuyuschie/")
-              .listen((event) {
-            _parsedDataSource.adsList.add(event);
-            _parsedDataSource.notifyListeners();
-          });
-        },
+      floatingActionButton: Visibility(
+        visible: false,
+        child: FloatingActionButton(
+          child: const Icon(Icons.get_app),
+          onPressed: () => startParseData(),
+        ),
       ),
     );
+  }
+
+  void listenNewAds(event) {
+    if (event != null) {
+      _parsedDataSource.adsList.add(event);
+      _parsedDataSource.notifyListeners();
+    }
+  }
+
+  void startParseData() async {
+    print("Parsing data...");
+    _olxRepository.getAdsList(url: _parseDataUrl).listen(listenNewAds);
   }
 }

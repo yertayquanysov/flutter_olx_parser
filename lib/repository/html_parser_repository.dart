@@ -12,6 +12,8 @@ abstract class IHtmlParserRepository {
   String getAdsLink();
 
   String getCityName();
+
+  String getDate();
 }
 
 class HtmlParserRepository implements IHtmlParserRepository {
@@ -56,5 +58,11 @@ class HtmlParserRepository implements IHtmlParserRepository {
   String getAdsLink() {
     var data = htmlData.getElementsByTagName("h3");
     return data[0].getElementsByTagName("a").first.attributes.values.first;
+  }
+
+  @override
+  String getDate() {
+    var data = htmlData.getElementsByClassName("bottom-cell");
+    return data[0].getElementsByTagName("span")[1].text;
   }
 }

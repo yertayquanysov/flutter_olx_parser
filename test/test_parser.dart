@@ -13,7 +13,7 @@ void main() {
   final OlxRepository olx = OlxRepository();
 
   test("test parse product id", () async {
-    Map<String, String> urls = {
+    Map<String?, String> urls = {
       "jTcfF":
           "https://www.olx.kz/kk/obyavlenie/avd-portotecnika-elite-2840-380-volt-b-u-IDjTcfF.html",
       "jXIoG":
@@ -47,7 +47,7 @@ void main() {
     final Document document = parse(testHtmlFile);
 
     final HtmlParserRepository _htmlParserRepository =
-        HtmlParserRepository(document.body);
+        HtmlParserRepository(document.body!);
 
     expect("Продам лазерный ч/б принтер HP LaserJet P2055d",
         _htmlParserRepository.getName());
@@ -61,7 +61,10 @@ void main() {
     expect("Компьютерлер » Қосалқы құрылғылар",
         _htmlParserRepository.getCategoryName());
 
-    expect("https://www.olx.kz/kk/obyavlenie/prodam-lazernyy-ch-b-printer-hp-laserjet-p2055d-IDh8TjV.html#f9f01ff837;promoted",
+    expect("11  март", _htmlParserRepository.getDate());
+
+    expect(
+        "https://www.olx.kz/kk/obyavlenie/prodam-lazernyy-ch-b-printer-hp-laserjet-p2055d-IDh8TjV.html#f9f01ff837;promoted",
         _htmlParserRepository.getAdsLink());
   });
 }

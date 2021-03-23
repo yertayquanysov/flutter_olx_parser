@@ -7,7 +7,7 @@ class ParsedDataTable extends StatelessWidget {
   final ParsedDataSource parsedDataSource;
 
   ParsedDataTable({
-    @required this.parsedDataSource,
+    required this.parsedDataSource,
   });
 
   @override
@@ -15,18 +15,6 @@ class ParsedDataTable extends StatelessWidget {
     return SfDataGrid(
       source: parsedDataSource,
       rowHeight: 100,
-      cellBuilder: (BuildContext context, GridColumn column, int rowindex) {
-
-        if (column.mappingName != "image") {
-          return Text("Ақпарат жоқ");
-        }
-
-        return CachedNetworkImage(
-          fit: BoxFit.cover,
-          imageUrl: parsedDataSource.adsList[rowindex].imageUrl,
-        );
-
-      },
       columns: [
         GridTextColumn(
           mappingName: 'name',
@@ -37,6 +25,26 @@ class ParsedDataTable extends StatelessWidget {
           headerText: "Суреті",
           padding: const EdgeInsets.all(18.0),
         ),
+        GridWidgetColumn(
+          mappingName: "city",
+          headerText: "Қала",
+          padding: const EdgeInsets.all(18.0),
+        ),
+        GridWidgetColumn(
+          mappingName: "date",
+          headerText: "Күні",
+          padding: const EdgeInsets.all(18.0),
+        ),
+        GridWidgetColumn(
+          mappingName: "categoryName",
+          headerText: "Санат",
+          padding: const EdgeInsets.all(18.0),
+        ),
+        GridWidgetColumn(
+          mappingName: "sellerName",
+          headerText: "Сатушы",
+          padding: const EdgeInsets.all(18.0),
+        ),
         GridTextColumn(
           mappingName: 'price',
           headerText: 'Бағасы',
@@ -44,10 +52,6 @@ class ParsedDataTable extends StatelessWidget {
         GridTextColumn(
           mappingName: 'phoneNumber',
           headerText: 'Телефон номер',
-        ),
-        GridTextColumn(
-          mappingName: 'sellerName',
-          headerText: 'Сатушы',
         ),
         GridTextColumn(
           mappingName: 'offerUrl',

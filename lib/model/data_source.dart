@@ -10,9 +10,9 @@ class ParsedDataSource extends DataGridSource<ParsedData> {
   @override
   bool shouldRecalculateColumnWidths() => true;
 
-  getValue(ParsedData data, String columnName) {
+  String getValue(ParsedData data, String columnName) {
     try {
-      return data.toDocument()[columnName];
+      return data.toDocument()[columnName].toString();
     } catch (e) {
       return "";
     }
