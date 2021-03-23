@@ -90,7 +90,7 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       floatingActionButton: Visibility(
-        visible: false,
+        visible: _parsedDataSource.adsList.length != 0,
         child: FloatingActionButton(
           child: const Icon(Icons.get_app),
           onPressed: () => startParseData(),
