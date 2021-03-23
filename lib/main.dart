@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:olx_parser/model/parsed_data.dart';
 import 'package:olx_parser/repository/olx_repository.dart';
 import 'package:olx_parser/ui/components/parsed_data_table.dart';
 import 'package:superellipse_shape/superellipse_shape.dart';
