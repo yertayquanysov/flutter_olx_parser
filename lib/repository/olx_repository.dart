@@ -72,7 +72,6 @@ class OlxRepository implements IOlxRepository {
   }
 
   Stream<ParsedData?> getAdsList({@required url}) async* {
-    print("Start");
 
     final String htmlData = await getPageHTML(url);
     final Document document = parse(htmlData);

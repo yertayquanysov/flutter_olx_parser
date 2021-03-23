@@ -39,13 +39,13 @@ class ParsedData {
     };
   }
 
-  static Future<ParsedData> formDocument(dataHtml.Element data) async {
-    final _parser = HtmlParserRepository(data);
-    final _olxParser = OlxRepository();
-
-    final phoneNumber = await _olxParser.getPhoneNumber(_parser.getAdsLink());
-
+  static Future<ParsedData?> formDocument(dataHtml.Element data) async {
     try {
+      final _parser = HtmlParserRepository(data);
+      final _olxParser = OlxRepository();
+
+      final phoneNumber = await _olxParser.getPhoneNumber(_parser.getAdsLink());
+
       return ParsedData(
         name: _parser.getName(),
         imageUrl: _parser.getImageUrl(),
@@ -57,7 +57,7 @@ class ParsedData {
         offerUrl: _parser.getAdsLink(),
       );
     } catch (e) {
-      return ParsedData(name: e.toString(), imageUrl: "");
+      return null;
     }
   }
 }

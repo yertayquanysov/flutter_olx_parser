@@ -1,6 +1,12 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:olx_parser/repository/olx_repository.dart';
+import 'package:olx_parser/ui/components/parse_button.dart';
 import 'package:olx_parser/ui/components/parsed_data_table.dart';
+import 'package:olx_parser/ui/components/url_field.dart';
 import 'package:superellipse_shape/superellipse_shape.dart';
 
 import 'model/data_source.dart';
@@ -15,8 +21,8 @@ class ParserApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        primaryColor: Colors.redAccent,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+        primaryColor: Color(0xFF0fb9b1),
+        textTheme: GoogleFonts.ubuntuTextTheme(),
       ),
       home: HomePage(),
     );
@@ -37,53 +43,48 @@ class _HomePageState extends State<HomePage> {
   String _parseDataUrl =
       "https://www.olx.kz/kk/elektronika/kompyutery-i-komplektuyuschie/";
 
+  bool _isParseStarted = false;
+
+  StreamSubscription? _streamSubscription;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("OLX парсер"),
         elevation: 3,
         toolbarHeight: 50,
+        title: Text(
+          "OLX парсер",
+          style: GoogleFonts.ubuntu(color: Colors.white),
+        ),
       ),
       body: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.only(
-              right: 10,
-              left: 10,
-              top: 18,
-              bottom: 8,
-            ),
-            child: TextField(
-              onChanged: (v) => _parseDataUrl,
-              decoration: InputDecoration(
-                hintText: "Olx url",
-                contentPadding: const EdgeInsets.only(
-                  right: 18,
-                  left: 18,
-                  top: 5,
-                  bottom: 5,
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: BorderSide(width: 3),
-                ),
-              ),
+          UrlField(onChanged: (v) => _parseDataUrl = v),
+          Visibility(
+            visible: _isParseStarted,
+            child: LinearProgressIndicator(),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Visibility(
+            visible: !_isParseStarted,
+            child: ParseButton(
+              value: 'Номерлерді жинау',
+              onTap: () => startParseData(),
             ),
           ),
-          MaterialButton(
-            child: const Text("Начат"),
-            color: Colors.redAccent,
-            textColor: Colors.white,
-            onPressed: startParseData,
-            shape: SuperellipseShape(
-              borderRadius: BorderRadius.circular(10),
-            ),
+          Visibility(
+            visible: _isParseStarted,
+            child: ParseButton(value: 'Тоқтату', onTap: () => stopJob()),
           ),
-          Expanded(
-            child: ParsedDataTable(
-              parsedDataSource: _parsedDataSource,
-            ),
+          const SizedBox(
+            height: 10,
+          ),
+          ParsedDataTable(
+            parsedDataSource: _parsedDataSource,
+            isParseStarted: _isParseStarted,
           ),
         ],
       ),
@@ -98,14 +99,22 @@ class _HomePageState extends State<HomePage> {
   }
 
   void listenNewAds(event) {
-    if (event != null) {
-      _parsedDataSource.adsList.add(event);
-      _parsedDataSource.notifyListeners();
-    }
+    print(event.name);
+
+    _parsedDataSource.adsList.add(event);
+    _parsedDataSource.notifyListeners();
   }
 
   void startParseData() async {
-    print("Parsing data...");
-    _olxRepository.getAdsList(url: _parseDataUrl).listen(listenNewAds);
+    if (!_isParseStarted) {
+      setState(() => _isParseStarted = true);
+      _streamSubscription =
+          _olxRepository.getAdsList(url: _parseDataUrl).listen(listenNewAds);
+    }
+  }
+
+  void stopJob() {
+    setState(() => _isParseStarted = false);
+    _streamSubscription?.cancel();
   }
 }
