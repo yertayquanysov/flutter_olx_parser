@@ -71,8 +71,10 @@ class OlxRepository implements IOlxRepository {
     }
   }
 
-  Stream<ParsedData?> getAdsList({@required url}) async* {
-
+  Stream<ParsedData?> getAdsList({
+    required url,
+    required VoidCallback onFinish,
+  }) async* {
     final String htmlData = await getPageHTML(url);
     final Document document = parse(htmlData);
 
@@ -80,6 +82,10 @@ class OlxRepository implements IOlxRepository {
 
     for (int a = 0; a < adsList.length; a++) {
       yield await ParsedData.formDocument(adsList[a]);
+
+      if (adsList[a] == adsList.last) {
+        onFinish();
+      }
     }
   }
 }
