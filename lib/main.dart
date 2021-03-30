@@ -2,15 +2,11 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:olx_parser/model/parsed_data.dart';
+import 'package:olx_parser/repository/excel_repository.dart';
 import 'package:olx_parser/repository/olx_repository.dart';
 import 'package:olx_parser/ui/components/parse_button.dart';
-import 'package:olx_parser/ui/components/parsed_data_table.dart';
 import 'package:olx_parser/ui/components/url_field.dart';
-import 'package:superellipse_shape/superellipse_shape.dart';
-
-import 'model/data_source.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,10 +17,7 @@ class ParserApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-        primaryColor: Color(0xFF0fb9b1),
-        textTheme: GoogleFonts.ubuntuTextTheme(),
-      ),
+      theme: ThemeData(primaryColor: Color(0xFF0fb9b1)),
       home: HomePage(),
     );
   }
@@ -38,8 +31,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final ParsedDataSource _parsedDataSource = ParsedDataSource();
   final OlxRepository _olxRepository = OlxRepository();
+
+  final ExcelRepository _excelRepository = ExcelRepository();
 
   String _parseDataUrl =
       "https://www.olx.kz/kk/elektronika/kompyutery-i-komplektuyuschie/";
@@ -58,7 +52,7 @@ class _HomePageState extends State<HomePage> {
         toolbarHeight: 50,
         title: Text(
           "OLX парсер",
-          style: GoogleFonts.ubuntu(color: Colors.white),
+          style: TextStyle(color: Colors.white),
         ),
       ),
       body: Column(
@@ -70,6 +64,10 @@ class _HomePageState extends State<HomePage> {
           ),
           const SizedBox(
             height: 10,
+          ),
+          MaterialButton(
+            child: Text("Export"),
+            onPressed: () => _excelRepository.exportData(),
           ),
           Visibility(
             visible: !_isParseStarted,
@@ -87,13 +85,6 @@ class _HomePageState extends State<HomePage> {
           ),
           Text(_parsedDataList.length.toString()),
         ],
-      ),
-      floatingActionButton: Visibility(
-        visible: _parsedDataSource.adsList.length != 0,
-        child: FloatingActionButton(
-          child: const Icon(Icons.get_app),
-          onPressed: () => startParseData(),
-        ),
       ),
     );
   }
@@ -116,9 +107,5 @@ class _HomePageState extends State<HomePage> {
   void stopJob() {
     setState(() => _isParseStarted = false);
     _streamSubscription?.cancel();
-  }
-
-  void saveResult() async{
-    // var excel = Excel.createExcel();
   }
 }
