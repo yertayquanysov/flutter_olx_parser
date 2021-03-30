@@ -1,0 +1,39 @@
+curl 'https://shonbay.kz/cabinet/update-profile' \
+  -H 'Connection: keep-alive' \
+  -H 'sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"' \
+  -H 'DNT: 1' \
+  -H 'X-CSRF-TOKEN: prtZHbEt6DMVNlaYmh4vRLJEDwgD48yCx2YJHmrR' \
+  -H 'sec-ch-ua-mobile: ?0' \
+  -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36' \
+  -H 'Content-Type: application/json;charset=UTF-8' \
+  -H 'Accept: application/json, text/plain, */*' \
+  -H 'X-Requested-With: XMLHttpRequest' \
+  -H 'Origin: https://shonbay.kz' \
+  -H 'Sec-Fetch-Site: same-origin' \
+  -H 'Sec-Fetch-Mode: cors' \
+  -H 'Sec-Fetch-Dest: empty' \
+  -H 'Referer: https://shonbay.kz/cabinet/profile' \
+  -H 'Accept-Language: en-US,en;q=0.9,ru-RU;q=0.8,ru;q=0.7' \
+  -H 'Cookie: _ym_uid=16160724961053164014; _ym_d=1616072496; __ddg1=VRMxI390rLzlk0WAsfS1; userDeviceToken=eyJpdiI6ImQwYWcwU2tCY1VzZzN5WGJkSzZWM2c9PSIsInZhbHVlIjoiNE5xRkJzK3dcL0VNOHBJMG5EVkR2bndTMndkcnRkSmFcL01MVHllbUFmSGlcL1NjeGg3U0hqSk5iaGh1MHdLTkl1b0UxY2xldDMyaWtHMFM1bEU5OGErWmFHWDI2RjAyZzBcL2JldzlIcGZ5ZU1PamtkWUZOc294QmhGMEY0b0lWZ1BYIiwibWFjIjoiZWQwOTVmOTYwNDcxYjU0NmI0ZTk2NWQxNjBhMjNiYTJiODFjMTBkMjdjNmE1YWNlZWQyZTA1MDJkZWY5N2RkOCJ9; __ddg2=ZVwXq8LnbryrkVAr; _ym_isad=2; _ym_visorc=w; remember_web_3dc7a913ef5fd4b890ecabe3487085573e16cf82=eyJpdiI6ImZ1SHc4NFF3Z0Q1YjFxUGc5TEtTQ2c9PSIsInZhbHVlIjoiMlFJWFwvRElKY0RJNGhwT3ZMYzcrcVwvbXR3Y1EwZWJpeWZYbE9rbU56VXpNeTdscXljakdxYjhrRzNOeXowUEh5WEpnc0JHOGNVa2hlMHJtODY3UjdcL2IzS0tESmcxRERkR0FPemsxV0ZuK0dMcWtOaFpQbnd6R09uYnlxc3NUdDRYdE1YRnY0WHJzdWNEaE52azZNbGtCUGl5MVFmN1FVTk1lN0N1R3FOckVlaWlJZG1OdUZTRTZFTXI4aU5qMFdaY09yNGo5NEV5M2h4YWNBUFEzYmNXOGU2dG40SndXRGdyYk9VZHNCaFl0QT0iLCJtYWMiOiI0Yjk3ZGYyZTMyNGM5MTM0NDQ4MDNlOGY3OWE3NjUyZmYxZDI1YmQ0ZWUxN2M5OTI3YmYzZTgxYWQ1MGZmMGVjIn0%3D; XSRF-TOKEN=eyJpdiI6InAwcmF0WnlHWVYzRDN1YWZJT3B5b2c9PSIsInZhbHVlIjoia2hvMTZBRGl0OEZ4ZGNZR2dJTldwMVJ3WkVhdDdXN04rNk8zYjFMckV0ZlJaQVJ2aFJHeXFZbld4VEJxbFoyKzVOcE9SVExDSGZ1TTM1OW5pZzZVb3BmQVc5TXROdFY2dkZSb0FzYVZJXC9aSkZURTJyNEJUVE5Hc3dSdnVHOFBcLyIsIm1hYyI6IjQ2ZTA1M2ZlYjk2YjI3MmQxYmM5MWM4OGUzZDE2MTBjZjBjMzZhOTJjZjBhNmQ4NDFiNjBjNDQ3ODJkODM0N2EifQ%3D%3D; shonbay_session=eyJpdiI6ImlJYTExcVAwNmQzMjh5OGVtR1wvOFwvQT09IiwidmFsdWUiOiJJY1U3ZW9uOVQ4aGRhV3NmSHJReTRkK2d3VlwveGpRTVQwXC9hM1pwWVFlZnpNb1hqMWE5NGxYR25CM3JxaFF5M2NjMUdOVzJFY2R1b2FFaEdVZXhaSXY2T01DNGRXSWdoZUx3UEpGd0VhMk1zQXpyZXJ0RXE3T3pWR3Ywckt4ZkF1IiwibWFjIjoiNzlmMTY0YmZlNzI4M2JlMjA3NzRiODgwYTFiYWY2YzNjMjg5MDhkZjAxNTA4MzgwODE1N2ZjNWQ0ZGFhN2YxYiJ9' \
+  --data-raw '{"name":"E","last_name":"Q","phone":"77058958692","email":null,"patronymic":null,"_method":"PUT"}' \
+  --compressed
+
+
+  curl 'https://shonbay.kz/cabinet/update-profile' \
+  -H 'Connection: keep-alive' \
+  -H 'sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"' \
+  -H 'DNT: 1' \
+  -H 'X-CSRF-TOKEN: prtZHbEt6DMVNlaYmh4vRLJEDwgD48yCx2YJHmrR' \
+  -H 'sec-ch-ua-mobile: ?0' \
+  -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36' \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'Accept: */*' \
+  -H 'Origin: https://shonbay.kz' \
+  -H 'Sec-Fetch-Site: same-origin' \
+  -H 'Sec-Fetch-Mode: cors' \
+  -H 'Sec-Fetch-Dest: empty' \
+  -H 'Referer: https://shonbay.kz/cabinet/profile' \
+  -H 'Accept-Language: en-US,en;q=0.9,ru-RU;q=0.8,ru;q=0.7' \
+  -H 'Cookie: _ym_uid=16160724961053164014; _ym_d=1616072496; __ddg1=VRMxI390rLzlk0WAsfS1; userDeviceToken=eyJpdiI6ImQwYWcwU2tCY1VzZzN5WGJkSzZWM2c9PSIsInZhbHVlIjoiNE5xRkJzK3dcL0VNOHBJMG5EVkR2bndTMndkcnRkSmFcL01MVHllbUFmSGlcL1NjeGg3U0hqSk5iaGh1MHdLTkl1b0UxY2xldDMyaWtHMFM1bEU5OGErWmFHWDI2RjAyZzBcL2JldzlIcGZ5ZU1PamtkWUZOc294QmhGMEY0b0lWZ1BYIiwibWFjIjoiZWQwOTVmOTYwNDcxYjU0NmI0ZTk2NWQxNjBhMjNiYTJiODFjMTBkMjdjNmE1YWNlZWQyZTA1MDJkZWY5N2RkOCJ9; __ddg2=ZVwXq8LnbryrkVAr; _ym_isad=2; _ym_visorc=w; remember_web_3dc7a913ef5fd4b890ecabe3487085573e16cf82=eyJpdiI6ImZ1SHc4NFF3Z0Q1YjFxUGc5TEtTQ2c9PSIsInZhbHVlIjoiMlFJWFwvRElKY0RJNGhwT3ZMYzcrcVwvbXR3Y1EwZWJpeWZYbE9rbU56VXpNeTdscXljakdxYjhrRzNOeXowUEh5WEpnc0JHOGNVa2hlMHJtODY3UjdcL2IzS0tESmcxRERkR0FPemsxV0ZuK0dMcWtOaFpQbnd6R09uYnlxc3NUdDRYdE1YRnY0WHJzdWNEaE52azZNbGtCUGl5MVFmN1FVTk1lN0N1R3FOckVlaWlJZG1OdUZTRTZFTXI4aU5qMFdaY09yNGo5NEV5M2h4YWNBUFEzYmNXOGU2dG40SndXRGdyYk9VZHNCaFl0QT0iLCJtYWMiOiI0Yjk3ZGYyZTMyNGM5MTM0NDQ4MDNlOGY3OWE3NjUyZmYxZDI1YmQ0ZWUxN2M5OTI3YmYzZTgxYWQ1MGZmMGVjIn0%3D; XSRF-TOKEN=eyJpdiI6InAwcmF0WnlHWVYzRDN1YWZJT3B5b2c9PSIsInZhbHVlIjoia2hvMTZBRGl0OEZ4ZGNZR2dJTldwMVJ3WkVhdDdXN04rNk8zYjFMckV0ZlJaQVJ2aFJHeXFZbld4VEJxbFoyKzVOcE9SVExDSGZ1TTM1OW5pZzZVb3BmQVc5TXROdFY2dkZSb0FzYVZJXC9aSkZURTJyNEJUVE5Hc3dSdnVHOFBcLyIsIm1hYyI6IjQ2ZTA1M2ZlYjk2YjI3MmQxYmM5MWM4OGUzZDE2MTBjZjBjMzZhOTJjZjBhNmQ4NDFiNjBjNDQ3ODJkODM0N2EifQ%3D%3D; shonbay_session=eyJpdiI6ImlJYTExcVAwNmQzMjh5OGVtR1wvOFwvQT09IiwidmFsdWUiOiJJY1U3ZW9uOVQ4aGRhV3NmSHJReTRkK2d3VlwveGpRTVQwXC9hM1pwWVFlZnpNb1hqMWE5NGxYR25CM3JxaFF5M2NjMUdOVzJFY2R1b2FFaEdVZXhaSXY2T01DNGRXSWdoZUx3UEpGd0VhMk1zQXpyZXJ0RXE3T3pWR3Ywckt4ZkF1IiwibWFjIjoiNzlmMTY0YmZlNzI4M2JlMjA3NzRiODgwYTFiYWY2YzNjMjg5MDhkZjAxNTA4MzgwODE1N2ZjNWQ0ZGFhN2YxYiJ9' \
+  --data-raw '{"name":"E","last_name":"Q","phone":"77058958692","email":null,"patronymic":null,"_method":"PUT"}' \
+  --compressed
