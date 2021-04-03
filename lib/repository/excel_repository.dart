@@ -1,10 +1,11 @@
 import 'dart:io';
 
 import 'package:excel/excel.dart';
+import 'package:olx_parser/model/parsed_data.dart';
 import 'package:path_provider/path_provider.dart';
 
 class ExcelRepository {
-  Future exportData() async {
+  Future<bool> exportData(List<ParsedData> parsedData) async {
     final excel = Excel.createExcel();
 
     await excel.setDefaultSheet("parser");
@@ -26,9 +27,24 @@ class ExcelRepository {
 
     defaultSheet.insertRowIterables(dataList, 0);
 
+    parsedData.asMap().forEach((key, value) {
+      defaultSheet.insertRowIterables([
+        value.name,
+        value.phoneNumber,
+        value.city,
+        value.price,
+        value.categoryName,
+        value.offerUrl,
+        value.sellerName,
+        value.date,
+      ], key + 1);
+    });
+
     final encodedData = await excel.encode();
 
-    save(encodedData);
+    await save(encodedData);
+
+    return true;
   }
 
   Future<bool> save(data) async {

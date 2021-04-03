@@ -32,7 +32,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final OlxRepository _olxRepository = OlxRepository();
-
   final ExcelRepository _excelRepository = ExcelRepository();
 
   String _parseDataUrl =
@@ -50,7 +49,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         elevation: 3,
         toolbarHeight: 50,
-        title: Text(
+        title: const Text(
           "OLX парсер",
           style: TextStyle(color: Colors.white),
         ),
@@ -65,9 +64,15 @@ class _HomePageState extends State<HomePage> {
           const SizedBox(
             height: 10,
           ),
-          MaterialButton(
-            child: Text("Export"),
-            onPressed: () => _excelRepository.exportData(),
+          Visibility(
+            visible: _isParseStarted,
+            child: MaterialButton(
+              child: Text("Сохранит в формате  Excel"),
+              onPressed: () async {
+                await _excelRepository.exportData(_parsedDataList);
+                setState(() {});
+              },
+            ),
           ),
           Visibility(
             visible: !_isParseStarted,
@@ -83,7 +88,9 @@ class _HomePageState extends State<HomePage> {
           const SizedBox(
             height: 10,
           ),
-          Text(_parsedDataList.length.toString()),
+          Text(
+            _parsedDataList.length.toString(),
+          ),
         ],
       ),
     );
