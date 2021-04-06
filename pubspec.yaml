@@ -1,5 +1,5 @@
 name: olx_parser
-description: A new Flutter application.
+description: A new Flutter application
 
 version: 1.0.0+1
 
@@ -17,6 +17,9 @@ dependencies:
   excel: ^1.1.5
   crypto: ^2.0.0
   path_provider: ^2.0.1
+  firebase_core: ^1.0.2
+  cloud_firestore: ^1.0.3
+  url_launcher: ^6.0.3
 
 dev_dependencies:
   flutter_test:

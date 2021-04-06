@@ -5,6 +5,8 @@ import 'package:flutter/widgets.dart';
 import 'package:olx_parser/model/parsed_data.dart';
 import 'package:olx_parser/repository/excel_repository.dart';
 import 'package:olx_parser/repository/olx_repository.dart';
+import 'package:olx_parser/screens/contact.dart';
+import 'package:olx_parser/screens/warning_screen.dart';
 import 'package:olx_parser/ui/components/parse_button.dart';
 import 'package:olx_parser/ui/components/url_field.dart';
 
@@ -19,6 +21,10 @@ class ParserApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(primaryColor: Color(0xFF0fb9b1)),
       home: HomePage(),
+      routes: {
+        "contact": (_) => ContactScreen(),
+        "warning_info": (_) => WarningScreen(),
+      },
     );
   }
 }
@@ -51,8 +57,24 @@ class _HomePageState extends State<HomePage> {
         toolbarHeight: 50,
         title: const Text(
           "OLX парсер",
-          style: TextStyle(color: Colors.white),
+          style: const TextStyle(color: Colors.white),
         ),
+        actions: [
+          IconButton(
+            icon: const Icon(
+              Icons.phone,
+              color: Colors.white,
+            ),
+            onPressed: () => Navigator.pushNamed(context, "contact"),
+          ),
+          IconButton(
+            icon: const Icon(
+              Icons.warning,
+              color: Colors.white,
+            ),
+            onPressed: () => Navigator.pushNamed(context, "warning_info"),
+          ),
+        ],
       ),
       body: Column(
         children: [
@@ -61,13 +83,11 @@ class _HomePageState extends State<HomePage> {
             visible: _isParseStarted,
             child: LinearProgressIndicator(),
           ),
-          const SizedBox(
-            height: 10,
-          ),
+          const SizedBox(height: 10),
           Visibility(
             visible: _isParseStarted,
             child: MaterialButton(
-              child: Text("Сохранит в формате  Excel"),
+              child: const Text("Сохранит в формате  Excel"),
               onPressed: () async {
                 await _excelRepository.exportData(_parsedDataList);
                 setState(() {});
