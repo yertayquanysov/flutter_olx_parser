@@ -34,15 +34,8 @@ void main() {
     });
   });
 
-  test("test parse phone number", () async {
-    await olx.getPhoneNumber(
-      "https://www.olx.kz/kk/obyavlenie/repetitor-russkiy-yazyk-i-matematika-IDjYwlT.html#06f3abb167;promoted",
-    );
-
-    expect(1, 1);
-  });
-
   test("test html data parser", () async {
+
     final testHtmlFile = await rootBundle.loadString("assets/test_item_data");
     final Document document = parse(testHtmlFile);
 

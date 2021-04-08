@@ -14,8 +14,8 @@ class WarningScreen extends StatelessWidget {
         child: Column(
           children: [
             Text(
-              "Бұл ақылы программа. Заңсыз жолмен алып, кейін компьютеріңізде мәселе туындаса, бұған өзіңіз кінәлсіз.",
-              style: TextStyle(fontSize: 18),
+              "Бұл ақылы программа. Заңсыз жолмен алып, кейін компьютеріңізде мәселе туындаса, бұған өзіңіз кінәлсіз. Админ email: ertai.soft@gmail.com",
+              style: const TextStyle(fontSize: 18),
             ),
             AdminContact(),
           ],
