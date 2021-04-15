@@ -7,6 +7,7 @@ abstract class StorageRepository {
 }
 
 class StorageRepositoryImpl extends StorageRepository {
+
   final String key = "eq_key";
 
   final storage = FlutterSecureStorage();
@@ -17,7 +18,7 @@ class StorageRepositoryImpl extends StorageRepository {
   }
 
   @override
-  void setActivationKey(String newKey) {
-    storage.write(key: key, value: newKey);
+  Future<void> setActivationKey(String newKey) async{
+    await storage.write(key: key, value: newKey);
   }
 }

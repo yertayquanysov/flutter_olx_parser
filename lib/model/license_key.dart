@@ -1,6 +1,6 @@
 class LicenseKey {
-  final String deviceId;
 
+  final String deviceId;
   late DateTime activationDate;
 
   LicenseKey({

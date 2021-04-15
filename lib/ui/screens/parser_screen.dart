@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:olx_parser/model/parsed_data.dart';
 import 'package:olx_parser/repository/excel_repository.dart';
-import 'package:olx_parser/repository/lisence_repository.dart';
+import 'package:olx_parser/repository/license_repository.dart';
 import 'package:olx_parser/repository/olx_repository.dart';
 import 'package:olx_parser/ui/components/appbar.dart';
 import 'package:olx_parser/ui/components/parse_button.dart';
@@ -22,7 +22,7 @@ class ParserScreen extends StatefulWidget {
 class _HomePageState extends State<ParserScreen> {
   final OlxRepository _olxRepository = OlxRepository();
   final ExcelRepository _excelRepository = ExcelRepository();
-  final LicenceRepository _licenceRepository = LicenseRepositoryImpl();
+  final LicenseRepository _licenceRepository = LicenseRepositoryImpl();
 
   late String _parseDataUrl;
 

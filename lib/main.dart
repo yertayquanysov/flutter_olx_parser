@@ -13,16 +13,19 @@ void main() async {
 }
 
 class ParserApp extends StatelessWidget {
-  
+
   final StorageRepositoryImpl _storageRepository = StorageRepositoryImpl();
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(primaryColor: Color(0xFF0fb9b1)),
+      theme: ThemeData(
+        primaryColor: const Color(0xFF0fb9b1),
+      ),
       home: FutureBuilder<String>(
         future: _storageRepository.getActivationKey(),
         builder: (_, snapshot) {
+
           if (snapshot.hasError) {
             return Text("Error");
           }
