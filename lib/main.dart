@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:olx_parser/repository/storage_repository.dart';
-import 'package:olx_parser/ui/components/base_progress_bar.dart';
 import 'package:olx_parser/ui/screens/activation_screen.dart';
 import 'package:olx_parser/ui/screens/contact.dart';
 import 'package:olx_parser/ui/screens/parser_screen.dart';
