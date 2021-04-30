@@ -1,6 +1,7 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:olx_parser/repository/license_repository.dart';
+import 'package:get/get.dart';
 import 'package:olx_parser/repository/local_database_repository.dart';
 import 'package:olx_parser/ui/components/base_progress_bar.dart';
 import 'package:olx_parser/ui/components/error_message.dart';
@@ -11,6 +12,9 @@ import 'package:olx_parser/ui/screens/warning_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp();
+
   runApp(ParserApp());
 }
 
@@ -19,20 +23,18 @@ class ParserApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       theme: ThemeData(
         primaryColor: const Color(0xFF0fb9b1),
       ),
       home: FutureBuilder<String>(
-        future: _licenseRepository.getActivationKey(),
+        future: _licenseRepository.getSavedKey(),
         builder: (_, snapshot) {
-
           if (snapshot.hasError) {
             return ErrorMessage();
           }
 
           if (snapshot.hasData) {
-
             final String activationKey = snapshot.data!;
 
             if (activationKey.isEmpty) {
@@ -46,9 +48,9 @@ class ParserApp extends StatelessWidget {
         },
       ),
       routes: {
-        "contact": (_) => ContactScreen(),
+        ContactScreen.routeName: (_) => ContactScreen(),
         ActivationScreen.routeName: (_) => ActivationScreen(),
-        "warning_info": (_) => WarningScreen(),
+        WarningScreen.routeName: (_) => WarningScreen(),
         ParserScreen.routeName: (_) => ParserScreen(),
       },
     );

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1084844169317",
+    "project_id": "olx-parser-d7479",
+    "storage_bucket": "olx-parser-d7479.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1084844169317:android:8b855ebb3b69fb37628e8c",
+        "android_client_info": {
+          "package_name": "kz.ertai.olx_parser"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1084844169317-3ug06o6jcood1agv5d33btocqlp79p41.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAIVNDslAQY3T6T7dTQ7qSp-p8J0PdROcY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1084844169317-3ug06o6jcood1agv5d33btocqlp79p41.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

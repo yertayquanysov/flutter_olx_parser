@@ -1,9 +1,9 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 abstract class LocalDatabaseRepository {
-  Future<String> getActivationKey();
+  Future<String> getSavedKey();
 
-  void setActivationKey(String newKey);
+  void saveKey(String newKey);
 }
 
 class LocalDatabaseRepositoryImpl extends LocalDatabaseRepository {
@@ -13,12 +13,12 @@ class LocalDatabaseRepositoryImpl extends LocalDatabaseRepository {
   final storage = FlutterSecureStorage();
 
   @override
-  Future<String> getActivationKey() async {
+  Future<String> getSavedKey() async {
     return await storage.read(key: key) ?? "";
   }
 
   @override
-  Future<void> setActivationKey(String newKey) async{
+  Future<void> saveKey(String newKey) async{
     await storage.write(key: key, value: newKey);
   }
 }

@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:olx_parser/ui/components/admin_whatsapp.dart';
 
 class WarningScreen extends StatelessWidget {
+
+  static String routeName = "warning_screen";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

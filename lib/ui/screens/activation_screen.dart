@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:olx_parser/bloc/activation_cubit.dart';
 import 'package:olx_parser/repository/license_repository.dart';
 import 'package:olx_parser/ui/components/activation/activation_key_form.dart';
 import 'package:olx_parser/ui/components/base_progress_bar.dart';
+import 'package:olx_parser/ui/screens/parser_screen.dart';
 
 class ActivationScreen extends StatefulWidget {
   static String routeName = "activation_screen";
@@ -13,7 +15,6 @@ class ActivationScreen extends StatefulWidget {
 }
 
 class _ActivationScreenState extends State<ActivationScreen> {
-
   final LicenseRepository _licenseRepository = LicenseRepositoryImpl();
   late ActivationCubit _activationCubit;
 
@@ -34,24 +35,24 @@ class _ActivationScreenState extends State<ActivationScreen> {
       body: BlocConsumer(
         bloc: _activationCubit,
         listener: (_, state) {
+
           if (state is InValidaKey) {
-            ScaffoldMessenger.of(context)
-              ..hideCurrentSnackBar()
-              ..showSnackBar(
-                SnackBar(
-                  content: const Text("Ключ дұрыс емес"),
-                ),
-              );
+            Get.showSnackbar(GetBar(
+              messageText: Text("Ключ дұрыс емес"),
+            ));
+          }
+
+          if (state is ValidActivationKey) {
+            Get.toNamed(ParserScreen.routeName);
           }
         },
         builder: (_, state) {
+
           if (state is ActivationForm) {
             return ActivationKeyForm(
               licenseRepository: _licenseRepository,
               onActivate: (String passedLicenseKey) {
-                _activationCubit.checkLicense();
-
-                // _activationCubit.activate(passedLicenseKey);
+                _activationCubit.activate(passedLicenseKey);
               },
             );
           }

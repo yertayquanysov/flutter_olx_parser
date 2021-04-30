@@ -24,11 +24,17 @@ class ActivationCubit extends Cubit<ActivationState> {
   ActivationCubit(this.licenseRepository) : super(ActivationProgressBar());
 
   void activate(String productKey) async {
+
     try {
       emit(ActivationProgressBar());
-      await Future.delayed(Duration(seconds: 1));
-      emit(InValidaKey());
-      emit(ActivationForm());
+
+      final bool isValid = await licenseRepository.activateKey(productKey);
+
+      if (isValid) {
+        emit(ValidActivationKey());
+      } else {
+        emit(InValidaKey());
+      }
     } catch (e) {
       emit(ActivationException(e.toString()));
     }
@@ -37,8 +43,14 @@ class ActivationCubit extends Cubit<ActivationState> {
   void checkLicense() async {
     try {
       emit(ActivationProgressBar());
-      await licenseRepository.checkLicenseKey();
-      emit(ActivationForm());
+
+      final bool isValid = await licenseRepository.checkLicenseKey();
+
+      if (isValid) {
+        emit(ValidActivationKey());
+      } else {
+        emit(ActivationForm());
+      }
     } catch (e) {
       emit(ActivationException(e.toString()));
     }
