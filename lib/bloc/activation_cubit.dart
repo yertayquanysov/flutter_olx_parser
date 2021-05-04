@@ -1,10 +1,11 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:olx_parser/exceptions/license_exception.dart';
 import 'package:olx_parser/repository/license_repository.dart';
 import 'package:olx_parser/repository/local_database_repository.dart';
 
 abstract class ActivationState {}
 
-class InValidaKey extends ActivationState {}
+class InValidKey extends ActivationState {}
 
 class ActivationProgressBar extends ActivationState {}
 
@@ -24,7 +25,6 @@ class ActivationCubit extends Cubit<ActivationState> {
   ActivationCubit(this.licenseRepository) : super(ActivationProgressBar());
 
   void activate(String productKey) async {
-
     try {
       emit(ActivationProgressBar());
 
@@ -32,9 +32,11 @@ class ActivationCubit extends Cubit<ActivationState> {
 
       if (isValid) {
         emit(ValidActivationKey());
-      } else {
-        emit(InValidaKey());
       }
+    } on LicenseKeyActivatedException {
+      emit(InValidKey());
+    } on InValidLicenseKeyException {
+      emit(InValidKey());
     } catch (e) {
       emit(ActivationException(e.toString()));
     }

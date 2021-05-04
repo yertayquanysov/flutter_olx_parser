@@ -35,8 +35,7 @@ class _ActivationScreenState extends State<ActivationScreen> {
       body: BlocConsumer(
         bloc: _activationCubit,
         listener: (_, state) {
-
-          if (state is InValidaKey) {
+          if (state is InValidKey) {
             Get.showSnackbar(GetBar(
               messageText: Text("Ключ дұрыс емес"),
             ));
@@ -47,7 +46,6 @@ class _ActivationScreenState extends State<ActivationScreen> {
           }
         },
         builder: (_, state) {
-
           if (state is ActivationForm) {
             return ActivationKeyForm(
               licenseRepository: _licenseRepository,

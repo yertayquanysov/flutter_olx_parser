@@ -1,4 +1,3 @@
-import 'package:olx_parser/repository/firestore_repository.dart';
 import 'package:olx_parser/repository/local_database_repository.dart';
 import 'package:platform_device_id/platform_device_id.dart';
 
@@ -12,8 +11,6 @@ abstract class LicenseRepository {
 
 class LicenseRepositoryImpl extends LocalDatabaseRepositoryImpl
     implements LicenseRepository {
-  final FirebaseRepository _firebaseRepository = FirebaseRepositoryImpl();
-
   @override
   Future<String> getDeviceId() async {
     final String? deviceId = await PlatformDeviceId.getDeviceId;
@@ -29,20 +26,13 @@ class LicenseRepositoryImpl extends LocalDatabaseRepositoryImpl
       return false;
     }
 
-    final bool isValidKey = await _firebaseRepository.validateKey(
-      deviceId: deviceId,
-      licenseKey: activationKey,
-    );
-
-    return isValidKey;
+    return true;
   }
 
   @override
   Future<bool> activateKey(String licenseKey) async {
     await saveKey(licenseKey);
-    return await _firebaseRepository.activateKey(
-      licenseKey,
-      await getDeviceId(),
-    );
+
+    return true;
   }
 }
