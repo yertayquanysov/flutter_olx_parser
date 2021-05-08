@@ -1,7 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:olx_parser/exceptions/license_exception.dart';
 import 'package:olx_parser/repository/license_repository.dart';
-import 'package:olx_parser/repository/local_database_repository.dart';
 
 abstract class ActivationState {}
 
@@ -20,7 +19,8 @@ class ActivationForm extends ActivationState {}
 class ValidActivationKey extends ActivationState {}
 
 class ActivationCubit extends Cubit<ActivationState> {
-  LicenseRepository licenseRepository;
+
+  final LicenseRepository licenseRepository;
 
   ActivationCubit(this.licenseRepository) : super(ActivationProgressBar());
 
