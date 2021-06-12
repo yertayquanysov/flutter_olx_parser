@@ -1,15 +1,12 @@
+import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/material.dart';
-import 'package:olx_parser/repository/license_repository.dart';
 
 class ActivationKeyForm extends StatelessWidget {
-  final LicenseRepository licenseRepository;
+  final Function(String licenseKey) onActivate;
 
   String _passedLicenseKey = "";
 
-  final Function(String licenseKey) onActivate;
-
   ActivationKeyForm({
-    required this.licenseRepository,
     required this.onActivate,
   });
 
@@ -19,17 +16,14 @@ class ActivationKeyForm extends StatelessWidget {
       padding: const EdgeInsets.all(18.0),
       child: Column(
         children: [
-          TextFormField(
+          TextBox(
             minLines: 5,
             maxLines: 5,
+            placeholder: "Ключті енгізіңіз",
             onChanged: (value) => _passedLicenseKey = value,
-            decoration: InputDecoration(
-              hintText: "Ключті енгізіңіз",
-            ),
           ),
           const SizedBox(height: 10),
-          MaterialButton(
-            color: Colors.greenAccent,
+          FilledButton(
             child: const Text("Активация"),
             onPressed: () => onActivate(_passedLicenseKey),
           ),

@@ -1,3 +1,4 @@
+import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/material.dart';
 
 class UrlField extends StatelessWidget {
@@ -9,21 +10,9 @@ class UrlField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(right: 10, left: 10, top: 18, bottom: 8),
-      child: TextField(
+      child: TextBox(
         onChanged: onChanged,
-        decoration: InputDecoration(
-          hintText: "Сілтемені енгізіңіз",
-          contentPadding: const EdgeInsets.only(
-            right: 18,
-            left: 18,
-            top: 5,
-            bottom: 5,
-          ),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(width: 3),
-          ),
-        ),
+        placeholder: "Введите ссылку",
       ),
     );
   }

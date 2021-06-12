@@ -1,7 +1,7 @@
+import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:get/get.dart';
-import 'package:olx_parser/repository/local_database_repository.dart';
+import 'package:olx_parser/repository/license_repository.dart';
 import 'package:olx_parser/ui/components/base_progress_bar.dart';
 import 'package:olx_parser/ui/components/error_message.dart';
 import 'package:olx_parser/ui/screens/activation_screen.dart';
@@ -15,17 +15,14 @@ void main() async {
 }
 
 class ParserApp extends StatelessWidget {
-  final _licenseRepository = LocalDatabaseRepositoryImpl();
+  final _licenseRepository = LicenseRepositoryImpl();
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    return FluentApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primaryColor: const Color(0xFF0fb9b1),
-      ),
-      home: FutureBuilder<String>(
-        future: _licenseRepository.getSavedKey(),
+      home: FutureBuilder<bool>(
+        future: _licenseRepository.checkLicenseKey(),
         builder: (_, snapshot) {
           if (snapshot.hasError) {
             print(snapshot.error);
@@ -33,9 +30,9 @@ class ParserApp extends StatelessWidget {
           }
 
           if (snapshot.hasData) {
-            final String activationKey = snapshot.data!;
+            final isSuccess = snapshot.data!;
 
-            if (activationKey.isEmpty) {
+            if (!isSuccess) {
               return ActivationScreen();
             } else {
               return ParserScreen();

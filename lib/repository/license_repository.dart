@@ -1,37 +1,37 @@
+import 'package:olx_parser/repository/jwt_repository.dart';
 import 'package:olx_parser/repository/local_database_repository.dart';
-import 'package:platform_device_id/platform_device_id.dart';
+
+import '../ext.dart';
 
 abstract class LicenseRepository {
-  Future<String> getDeviceId();
-
   Future<bool> checkLicenseKey();
 
   Future<bool> activateKey(String licenseKey);
 }
 
-class LicenseRepositoryImpl extends LocalDatabaseRepositoryImpl
-    implements LicenseRepository {
-  @override
-  Future<String> getDeviceId() async {
-    final String? deviceId = await PlatformDeviceId.getDeviceId;
-    return deviceId!;
-  }
+class LicenseRepositoryImpl implements LicenseRepository {
+  final _localDatabase = LocalDatabaseRepositoryImpl();
+  final _jwtRepository = JwtRepositoryImpl();
 
   @override
   Future<bool> checkLicenseKey() async {
-    final activationKey = await getSavedKey();
+    final activationKey = await _localDatabase.getSavedKey();
     final deviceId = await getDeviceId();
 
     if (activationKey.isEmpty) {
       return false;
     }
 
-    return true;
+    return false;
   }
 
   @override
   Future<bool> activateKey(String licenseKey) async {
-    await saveKey(licenseKey);
+    if (!_jwtRepository.isValid(licenseKey)) {
+      return false;
+    }
+
+    await _localDatabase.saveKey(licenseKey);
 
     return true;
   }

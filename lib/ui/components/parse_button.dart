@@ -1,5 +1,5 @@
+import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/material.dart';
-import 'package:superellipse_shape/superellipse_shape.dart';
 
 class ParseButton extends StatelessWidget {
   final VoidCallback onTap;
@@ -12,14 +12,9 @@ class ParseButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialButton(
+    return Button(
       child: Text(value),
-      color: Color(0xFF0fb9b1),
-      textColor: Colors.white,
       onPressed: onTap,
-      shape: SuperellipseShape(
-        borderRadius: BorderRadius.circular(18),
-      ),
     );
   }
 }

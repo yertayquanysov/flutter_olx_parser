@@ -24,7 +24,7 @@ class LocalDatabaseRepositoryImpl extends LocalDatabaseRepository {
   @override
   Future<void> saveKey(String newKey) async {
     final _pref = await getPreferences();
-    _pref.setString(fieldKey, newKey);
+    await _pref.setString(fieldKey, newKey);
   }
 
   @override

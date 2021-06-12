@@ -1,7 +1,9 @@
+import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:olx_parser/bloc/activation_cubit.dart';
+import 'package:olx_parser/bloc/activation_cubit_state.dart';
 import 'package:olx_parser/repository/license_repository.dart';
 import 'package:olx_parser/ui/components/activation/activation_key_form.dart';
 import 'package:olx_parser/ui/components/base_progress_bar.dart';
@@ -23,16 +25,18 @@ class _ActivationScreenState extends State<ActivationScreen> {
     super.initState();
 
     _activationCubit = ActivationCubit(_licenseRepository);
-    _activationCubit.checkLicense();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Активация жасау"),
+    return ScaffoldPage(
+      header: NavigationView(
+        appBar: NavigationAppBar(
+          title: Text('OLX парсер'),
+          automaticallyImplyLeading: true,
+        ),
       ),
-      body: BlocConsumer(
+      content: BlocConsumer(
         bloc: _activationCubit,
         listener: (_, state) {
           if (state is InValidKey) {
@@ -42,15 +46,14 @@ class _ActivationScreenState extends State<ActivationScreen> {
           }
 
           if (state is ValidActivationKey) {
-            Get.toNamed(ParserScreen.routeName);
+            Get.to(ParserScreen());
           }
         },
         builder: (_, state) {
           if (state is ActivationForm) {
             return ActivationKeyForm(
-              licenseRepository: _licenseRepository,
               onActivate: (String passedLicenseKey) {
-                _activationCubit.activate(passedLicenseKey);
+                _activationCubit.activateLicenseKey(passedLicenseKey);
               },
             );
           }
