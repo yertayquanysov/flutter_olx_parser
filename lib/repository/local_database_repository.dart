@@ -1,24 +1,35 @@
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class LocalDatabaseRepository {
   Future<String> getSavedKey();
 
-  void saveKey(String newKey);
+  Future<void> clear();
+
+  Future<void> saveKey(String newKey);
 }
 
 class LocalDatabaseRepositoryImpl extends LocalDatabaseRepository {
+  final String fieldKey = "key";
 
-  final String key = "eq_key";
-
-  final storage = FlutterSecureStorage();
-
-  @override
-  Future<String> getSavedKey() async {
-    return await storage.read(key: key) ?? "";
+  Future<SharedPreferences> getPreferences() async {
+    return await SharedPreferences.getInstance();
   }
 
   @override
-  Future<void> saveKey(String newKey) async{
-    await storage.write(key: key, value: newKey);
+  Future<String> getSavedKey() async {
+    final _pref = await getPreferences();
+    return _pref.getString(fieldKey) ?? "";
+  }
+
+  @override
+  Future<void> saveKey(String newKey) async {
+    final _pref = await getPreferences();
+    _pref.setString(fieldKey, newKey);
+  }
+
+  @override
+  Future<void> clear() async {
+    final _pref = await getPreferences();
+    _pref.clear();
   }
 }

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:olx_parser/repository/license_repository.dart';
 
 class ActivationKeyForm extends StatelessWidget {
-
   final LicenseRepository licenseRepository;
 
   String _passedLicenseKey = "";

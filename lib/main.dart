@@ -20,6 +20,7 @@ class ParserApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: const Color(0xFF0fb9b1),
       ),
@@ -27,6 +28,7 @@ class ParserApp extends StatelessWidget {
         future: _licenseRepository.getSavedKey(),
         builder: (_, snapshot) {
           if (snapshot.hasError) {
+            print(snapshot.error);
             return ErrorMessage();
           }
 
