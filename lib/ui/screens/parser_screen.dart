@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:olx_parser/model/parsed_data.dart';
@@ -38,13 +37,8 @@ class _HomePageState extends State<ParserScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ScaffoldPage(
-      header: NavigationView(
-        appBar: NavigationAppBar(
-          title: Text('OLX парсер'),
-        ),
-      ),
-      content: Column(
+    return Scaffold(
+      body: Column(
         children: [
           UrlField(onChanged: (v) => _parseDataUrl = v),
           Visibility(

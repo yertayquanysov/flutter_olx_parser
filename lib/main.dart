@@ -1,6 +1,6 @@
-import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
 import 'package:olx_parser/repository/license_repository.dart';
 import 'package:olx_parser/ui/components/base_progress_bar.dart';
 import 'package:olx_parser/ui/components/error_message.dart';
@@ -19,7 +19,7 @@ class ParserApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FluentApp(
+    return GetCupertinoApp(
       debugShowCheckedModeBanner: false,
       home: FutureBuilder<bool>(
         future: _licenseRepository.checkLicenseKey(),

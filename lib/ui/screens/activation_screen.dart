@@ -1,10 +1,10 @@
-import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:olx_parser/bloc/activation_cubit.dart';
 import 'package:olx_parser/bloc/activation_cubit_state.dart';
 import 'package:olx_parser/repository/license_repository.dart';
-import 'package:olx_parser/ui/components/activation/activation_key_form.dart';
+import 'package:olx_parser/ui/components/activation_key_form.dart';
 import 'package:olx_parser/ui/components/base_progress_bar.dart';
 
 class ActivationScreen extends StatefulWidget {
@@ -27,32 +27,21 @@ class _ActivationScreenState extends State<ActivationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ScaffoldPage(
-      header: NavigationView(
-        appBar: NavigationAppBar(
-          title: Text('OLX парсер'),
-          automaticallyImplyLeading: true,
-        ),
-      ),
-      content: BlocConsumer(
+    return Scaffold(
+      body: BlocConsumer(
         bloc: _activationCubit,
         listener: (_, state) {
           if (state is ActivationException) {
-            NoAcrylicBlurEffect(
-              child: InfoBar(
-                title: Text('Update available'),
-                content: Text(state.message),
-                severity: InfoBarSeverity.info,
+            Get.showSnackbar(
+              GetBar(
+                message: "Ключ дұрыс емес",
+                snackStyle: SnackStyle.FLOATING,
               ),
             );
           }
 
           if (state is ValidActivationKey) {
-            InfoBar(
-              title: Text('Update available'),
-              content: Text("OK"),
-              severity: InfoBarSeverity.success,
-            );
+            // TODO("")
           }
         },
         builder: (_, state) {

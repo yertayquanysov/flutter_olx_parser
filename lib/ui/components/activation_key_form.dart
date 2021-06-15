@@ -1,4 +1,3 @@
-import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/material.dart';
 
 class ActivationKeyForm extends StatelessWidget {
@@ -16,17 +15,20 @@ class ActivationKeyForm extends StatelessWidget {
       padding: const EdgeInsets.all(18.0),
       child: Column(
         children: [
-          TextBox(
+          TextFormField(
             minLines: 5,
             maxLines: 5,
-            placeholder: "Ключті енгізіңіз",
             onChanged: (value) => _passedLicenseKey = value,
+            decoration: InputDecoration(
+              hintText: "Ключті енгізіңіз",
+            ),
           ),
           const SizedBox(height: 10),
-          FilledButton(
+          MaterialButton(
             child: const Text("Активация"),
             onPressed: () => onActivate(_passedLicenseKey),
           ),
+          const SizedBox(height: 30),
         ],
       ),
     );

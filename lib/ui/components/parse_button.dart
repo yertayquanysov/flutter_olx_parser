@@ -1,4 +1,3 @@
-import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/material.dart';
 
 class ParseButton extends StatelessWidget {
@@ -12,7 +11,7 @@ class ParseButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Button(
+    return ElevatedButton(
       child: Text(value),
       onPressed: onTap,
     );
