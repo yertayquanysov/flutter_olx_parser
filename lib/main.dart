@@ -19,8 +19,9 @@ class ParserApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetCupertinoApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
+      title: "OLX парсер",
       home: FutureBuilder<bool>(
         future: _licenseRepository.checkLicenseKey(),
         builder: (_, snapshot) {

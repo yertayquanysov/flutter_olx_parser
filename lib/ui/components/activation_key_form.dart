@@ -15,7 +15,7 @@ class ActivationKeyForm extends StatelessWidget {
       padding: const EdgeInsets.all(18.0),
       child: Column(
         children: [
-          TextFormField(
+          TextField(
             minLines: 5,
             maxLines: 5,
             onChanged: (value) => _passedLicenseKey = value,
@@ -23,12 +23,10 @@ class ActivationKeyForm extends StatelessWidget {
               hintText: "Ключті енгізіңіз",
             ),
           ),
-          const SizedBox(height: 10),
           MaterialButton(
             child: const Text("Активация"),
             onPressed: () => onActivate(_passedLicenseKey),
           ),
-          const SizedBox(height: 30),
         ],
       ),
     );
