@@ -6,6 +6,7 @@ import 'package:olx_parser/bloc/activation_cubit_state.dart';
 import 'package:olx_parser/repository/license_repository.dart';
 import 'package:olx_parser/ui/components/activation_key_form.dart';
 import 'package:olx_parser/ui/components/base_progress_bar.dart';
+import 'package:olx_parser/ui/screens/parser_screen.dart';
 
 class ActivationScreen extends StatefulWidget {
   static String routeName = "activation_screen";
@@ -33,15 +34,12 @@ class _ActivationScreenState extends State<ActivationScreen> {
         listener: (_, state) {
           if (state is ActivationException) {
             Get.showSnackbar(
-              GetBar(
-                message: "Ключ дұрыс емес",
-                snackStyle: SnackStyle.FLOATING,
-              ),
+              GetBar(message: "Ключ дұрыс емес"),
             );
           }
 
           if (state is ValidActivationKey) {
-            // TODO("")
+            Get.to(ParserScreen(), preventDuplicates: false);
           }
         },
         builder: (_, state) {

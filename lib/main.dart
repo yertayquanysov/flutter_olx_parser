@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:olx_parser/repository/license_repository.dart';
 import 'package:olx_parser/ui/components/base_progress_bar.dart';
 import 'package:olx_parser/ui/components/error_message.dart';
@@ -22,6 +23,9 @@ class ParserApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: "OLX парсер",
+      theme: ThemeData(
+        textTheme: GoogleFonts.ubuntuTextTheme(),
+      ),
       home: FutureBuilder<bool>(
         future: _licenseRepository.checkLicenseKey(),
         builder: (_, snapshot) {
