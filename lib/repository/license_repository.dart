@@ -1,8 +1,6 @@
 import 'package:olx_parser/repository/jwt_repository.dart';
 import 'package:olx_parser/repository/local_database_repository.dart';
 
-import '../ext.dart';
-
 abstract class LicenseRepository {
   Future<bool> checkLicenseKey();
 
@@ -16,19 +14,26 @@ class LicenseRepositoryImpl implements LicenseRepository {
   @override
   Future<bool> checkLicenseKey() async {
     final activationKey = await _localDatabase.getSavedKey();
-    final deviceId = await getDeviceId();
 
     if (activationKey.isEmpty) {
       return false;
     }
 
-    return false;
+    if (!_jwtRepository.isValid(activationKey)) {
+      return false;
+    }
+
+    return true;
   }
 
   @override
   Future<bool> activateKey(String licenseKey) async {
-    if (!_jwtRepository.isValid(licenseKey)) {
-      return false;
+    final isValidKey = _jwtRepository.isValid(licenseKey);
+
+    print(isValidKey);
+
+    if (!isValidKey) {
+      return throw Exception("Ключ дұрыс емес");
     }
 
     await _localDatabase.saveKey(licenseKey);
