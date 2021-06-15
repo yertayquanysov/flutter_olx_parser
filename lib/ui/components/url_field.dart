@@ -12,17 +12,7 @@ class UrlField extends StatelessWidget {
       child: TextField(
         onChanged: onChanged,
         decoration: InputDecoration(
-          hintText: "Сілтемені енгізіңіз",
-          contentPadding: const EdgeInsets.only(
-            right: 18,
-            left: 18,
-            top: 5,
-            bottom: 5,
-          ),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(width: 3),
-          ),
+          hintText: "Введите ссылку",
         ),
       ),
     );

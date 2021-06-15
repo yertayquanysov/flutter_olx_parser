@@ -4,9 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:olx_parser/model/parsed_data.dart';
 import 'package:olx_parser/repository/excel_repository.dart';
-import 'package:olx_parser/repository/license_repository.dart';
 import 'package:olx_parser/repository/olx_repository.dart';
-import 'package:olx_parser/ui/components/appbar.dart';
 import 'package:olx_parser/ui/components/parse_button.dart';
 import 'package:olx_parser/ui/components/url_field.dart';
 
@@ -22,7 +20,6 @@ class ParserScreen extends StatefulWidget {
 class _HomePageState extends State<ParserScreen> {
   final OlxRepository _olxRepository = OlxRepository();
   final ExcelRepository _excelRepository = ExcelRepository();
-  final LicenseRepository _licenceRepository = LicenseRepositoryImpl();
 
   late String _parseDataUrl;
 
@@ -36,14 +33,11 @@ class _HomePageState extends State<ParserScreen> {
   @override
   void initState() {
     super.initState();
-
-    _licenceRepository.getDeviceId();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: ParserAppBar(),
       body: Column(
         children: [
           UrlField(onChanged: (v) => _parseDataUrl = v),
@@ -55,7 +49,7 @@ class _HomePageState extends State<ParserScreen> {
           Visibility(
             visible: _isParsingCompleted && _parsedDataList.length > 0,
             child: MaterialButton(
-              child: const Text("Сохранит в формате  Excel"),
+              child: const Text("Excel - ге сақтау"),
               onPressed: () async {
                 await _excelRepository.exportData(_parsedDataList);
                 setState(() {});
@@ -74,7 +68,12 @@ class _HomePageState extends State<ParserScreen> {
             child: ParseButton(value: 'Тоқтату', onTap: () => stopJob()),
           ),
           const SizedBox(height: 10),
-          Text(_parsedDataList.length.toString()),
+          Visibility(
+            visible: _isParseStarted,
+            child: Text(
+              _parsedDataList.length.toString(),
+            ),
+          ),
         ],
       ),
     );

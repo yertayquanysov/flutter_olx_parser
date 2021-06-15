@@ -6,7 +6,7 @@ class AdminContact extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialButton(
       onPressed: () async => launch("https://wa.me/77058958692"),
-      child: Text("WhatsApp - та жазу"),
+      child: const Text("WhatsApp - та жазу"),
     );
   }
 }
