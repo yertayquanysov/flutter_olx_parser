@@ -35,7 +35,6 @@ void main() {
   });
 
   test("test html data parser", () async {
-
     final testHtmlFile = await rootBundle.loadString("assets/test_item_data");
     final Document document = parse(testHtmlFile);
 
@@ -59,5 +58,10 @@ void main() {
     expect(
         "https://www.olx.kz/kk/obyavlenie/prodam-lazernyy-ch-b-printer-hp-laserjet-p2055d-IDh8TjV.html#f9f01ff837;promoted",
         _htmlParserRepository.getAdsLink());
+  });
+
+  test("get session data", () async {
+    final response = await olx.getSessionData();
+    print(response.headers.keys);
   });
 }

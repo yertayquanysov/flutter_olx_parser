@@ -1,5 +1,3 @@
-import 'package:flutter/cupertino.dart';
-
 class Cache {
   final String url;
   final String data;

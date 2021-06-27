@@ -29,29 +29,34 @@ class _ActivationScreenState extends State<ActivationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocConsumer(
-        bloc: _activationCubit,
-        listener: (_, state) {
-          if (state is ActivationException) {
-            Get.showSnackbar(
-              GetBar(message: "Ключ дұрыс емес"),
+      body: Center(
+        child: BlocConsumer(
+          bloc: _activationCubit,
+          listener: (_, state) {
+            if (state is ActivationException) {
+              Get.showSnackbar(
+                GetBar(
+                  message: "Ключ дұрыс емес",
+                  duration: Duration(seconds: 2),
+                ),
+              );
+            }
+
+            if (state is ValidActivationKey) {
+              Get.to(ParserScreen());
+            }
+          },
+          builder: (_, state) {
+            if (state is ActivationProgressBar) {
+              return BaseProgressBar();
+            }
+
+            return ActivationKeyForm(
+              onActivate: (String passedLicenseKey) =>
+                  _activationCubit.activateLicenseKey(passedLicenseKey),
             );
-          }
-
-          if (state is ValidActivationKey) {
-            Get.to(ParserScreen(), preventDuplicates: false);
-          }
-        },
-        builder: (_, state) {
-          if (state is ActivationProgressBar) {
-            return BaseProgressBar();
-          }
-
-          return ActivationKeyForm(
-            onActivate: (String passedLicenseKey) =>
-                _activationCubit.activateLicenseKey(passedLicenseKey),
-          );
-        },
+          },
+        ),
       ),
     );
   }

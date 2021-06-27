@@ -3,3 +3,5 @@ const String phoneNumberAjaxUrl =
 
 const String patternProductCode = r"([A-Z])\w+";
 const String patternPhoneNumberToken = r"[a-z 0-9]{128}";
+
+const DEFAULT_JWT_KEY = "iuawgdgwadyawd";

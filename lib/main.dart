@@ -22,7 +22,6 @@ class ParserApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: "OLX парсер",
       theme: ThemeData(
         textTheme: GoogleFonts.ubuntuTextTheme(),
       ),
