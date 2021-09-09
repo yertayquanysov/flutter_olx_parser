@@ -20,6 +20,7 @@ class ParserScreen extends StatefulWidget {
 }
 
 class _HomePageState extends State<ParserScreen> {
+
   final OlxRepository _olxRepository = OlxRepository();
   final ExcelRepository _excelRepository = ExcelRepository();
   final LicenseRepository _licenceRepository = LicenseRepositoryImpl();
@@ -46,7 +47,9 @@ class _HomePageState extends State<ParserScreen> {
       appBar: ParserAppBar(),
       body: Column(
         children: [
-          UrlField(onChanged: (v) => _parseDataUrl = v),
+          UrlField(
+            onChanged: (v) => _parseDataUrl = v,
+          ),
           Visibility(
             visible: _isParseStarted,
             child: LinearProgressIndicator(),
