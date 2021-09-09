@@ -11,15 +11,15 @@ dependencies:
     sdk: flutter
   html: 0.15.0
   http: 0.13.3
-  flutter_bloc: 7.0.1
-  superellipse_shape: 0.2.0-nullsafety.0
-  excel: 2.0.0-null-safety-3
+  flutter_bloc: ^7.2.0
+  superellipse_shape: ^0.1.6
+  excel: ^1.1.5
   crypto: 3.0.1
-  path_provider: 2.0.2
+  path_provider: ^2.0.3
   url_launcher: 6.0.6
   platform_device_id: 1.0.1
-  shared_preferences: 2.0.6
-  get: 4.1.4
+  shared_preferences: ^2.0.7
+  get: ^4.3.8
   jaguar_jwt: 3.0.0
   google_fonts: ^2.1.0
   cookie_jar: 3.0.1

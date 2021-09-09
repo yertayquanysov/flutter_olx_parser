@@ -28,12 +28,14 @@ class ParserApp extends StatelessWidget {
       home: FutureBuilder<bool>(
         future: _licenseRepository.checkLicenseKey(),
         builder: (_, snapshot) {
+
           if (snapshot.hasError) {
             print(snapshot.error);
             return ErrorMessage();
           }
 
           if (snapshot.hasData) {
+
             final isSuccess = snapshot.data!;
 
             if (!isSuccess) {
