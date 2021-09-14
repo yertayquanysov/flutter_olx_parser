@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:olx_parser/bloc/activation_cubit.dart';
+import 'package:olx_parser/repository/interface/license_repository.dart';
 import 'package:olx_parser/repository/license_repository.dart';
-import 'package:olx_parser/repository/rsa_repository.dart';
 import 'package:olx_parser/ui/components/activation/activation_key_form.dart';
 import 'package:olx_parser/ui/components/base_progress_bar.dart';
 
@@ -15,8 +15,6 @@ class ActivationScreen extends StatefulWidget {
 
 class _ActivationScreenState extends State<ActivationScreen> {
   final LicenseRepository _licenseRepository = LicenseRepositoryImpl();
-
-  final RsaRepositoryImpl _rsaRepository = RsaRepositoryImpl();
 
   late ActivationCubit _activationCubit;
 
@@ -53,8 +51,6 @@ class _ActivationScreenState extends State<ActivationScreen> {
               licenseRepository: _licenseRepository,
               onActivate: (String passedLicenseKey) {
                 _activationCubit.checkLicense();
-
-                // _activationCubit.activate(passedLicenseKey);
               },
             );
           }

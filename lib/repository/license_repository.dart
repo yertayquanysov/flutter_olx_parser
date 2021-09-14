@@ -1,10 +1,7 @@
 import 'package:olx_parser/repository/storage_repository.dart';
 import 'package:platform_device_id/platform_device_id.dart';
 
-abstract class LicenseRepository {
-  Future<String> getDeviceId();
-  Future<bool> checkLicenseKey();
-}
+import 'interface/license_repository.dart';
 
 class LicenseRepositoryImpl extends StorageRepositoryImpl
     implements LicenseRepository {
@@ -12,8 +9,12 @@ class LicenseRepositoryImpl extends StorageRepositoryImpl
 
   @override
   Future<String> getDeviceId() async {
-    final String? deviceId = await PlatformDeviceId.getDeviceId;
-    return deviceId!;
+    try {
+      final String? deviceId = await PlatformDeviceId.getDeviceId;
+      return deviceId!;
+    } catch (e) {
+      return "";
+    }
   }
 
   @override

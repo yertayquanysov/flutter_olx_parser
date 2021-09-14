@@ -1,13 +1,8 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-abstract class StorageRepository {
-  Future<String> getActivationKey();
+import 'interface/key_storage_repository.dart';
 
-  void setActivationKey(String newKey);
-}
-
-class StorageRepositoryImpl extends StorageRepository {
-
+class StorageRepositoryImpl implements KeyStorageRepository {
   final String key = "eq_key";
 
   final storage = FlutterSecureStorage();
@@ -18,7 +13,7 @@ class StorageRepositoryImpl extends StorageRepository {
   }
 
   @override
-  Future<void> setActivationKey(String newKey) async{
+  Future<void> setActivationKey(String newKey) async {
     await storage.write(key: key, value: newKey);
   }
 }

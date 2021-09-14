@@ -1,6 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:olx_parser/repository/license_repository.dart';
-import 'package:olx_parser/repository/storage_repository.dart';
+import 'package:olx_parser/repository/interface/license_repository.dart';
 
 abstract class ActivationState {}
 
