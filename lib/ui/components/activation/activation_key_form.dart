@@ -3,6 +3,7 @@ import 'package:olx_parser/repository/interface/license_repository.dart';
 import 'package:olx_parser/ui/components/base_progress_bar.dart';
 
 class ActivationKeyForm extends StatelessWidget {
+
   final LicenseRepository licenseRepository;
 
   String _passedLicenseKey = "";

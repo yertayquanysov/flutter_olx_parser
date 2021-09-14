@@ -17,6 +17,7 @@ class ParserApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: const Color(0xFF0fb9b1),
       ),
+      debugShowCheckedModeBanner: false,
       home: ParserScreen(),
       routes: {
         "contact": (_) => ContactScreen(),

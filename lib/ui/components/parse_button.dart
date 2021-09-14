@@ -14,8 +14,9 @@ class ParseButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialButton(
       child: Text(value),
-      color: Color(0xFF0fb9b1),
+      padding: const EdgeInsets.all(20),
       textColor: Colors.white,
+      color: Colors.blueAccent,
       onPressed: onTap,
       shape: SuperellipseShape(
         borderRadius: BorderRadius.circular(18),
