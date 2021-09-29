@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:olx_parser/ui/screens/contact.dart';
+import 'package:olx_parser/ui/screens/contact_screen.dart';
 
 class ParserAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
