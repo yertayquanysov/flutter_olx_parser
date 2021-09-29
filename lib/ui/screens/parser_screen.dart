@@ -21,6 +21,7 @@ class ParserScreen extends StatefulWidget {
 }
 
 class _HomePageState extends State<ParserScreen> {
+
   final OlxRepository _olxRepository = OlxRepository();
   final ExcelRepository _excelRepository = ExcelRepository();
   final LicenseRepository _licenceRepository = LicenseRepositoryImpl();
