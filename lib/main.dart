@@ -14,15 +14,12 @@ class ParserApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-        primaryColor: const Color(0xFF0fb9b1),
-      ),
       debugShowCheckedModeBanner: false,
       home: ParserScreen(),
       routes: {
         "contact": (_) => ContactScreen(),
-        ActivationScreen.routeName: (_) => ActivationScreen(),
         "warning_info": (_) => WarningScreen(),
+        ActivationScreen.routeName: (_) => ActivationScreen(),
         ParserScreen.routeName: (_) => ParserScreen(),
       },
     );
