@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
 import 'package:olx_parser/bloc/activation_cubit.dart';
-import 'package:olx_parser/bloc/activation_cubit_state.dart';
+import 'package:olx_parser/repository/interface/license_repository.dart';
 import 'package:olx_parser/repository/license_repository.dart';
-import 'package:olx_parser/ui/components/activation_key_form.dart';
+import 'package:olx_parser/ui/components/activation/activation_key_form.dart';
 import 'package:olx_parser/ui/components/base_progress_bar.dart';
-import 'package:olx_parser/ui/screens/parser_screen.dart';
 
 class ActivationScreen extends StatefulWidget {
   static String routeName = "activation_screen";
@@ -17,6 +15,7 @@ class ActivationScreen extends StatefulWidget {
 
 class _ActivationScreenState extends State<ActivationScreen> {
   final LicenseRepository _licenseRepository = LicenseRepositoryImpl();
+
   late ActivationCubit _activationCubit;
 
   @override
@@ -24,39 +23,40 @@ class _ActivationScreenState extends State<ActivationScreen> {
     super.initState();
 
     _activationCubit = ActivationCubit(_licenseRepository);
+    _activationCubit.checkLicense();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: BlocConsumer(
-          bloc: _activationCubit,
-          listener: (_, state) {
-            if (state is ActivationException) {
-              Get.showSnackbar(
-                GetBar(
-                  message: "Ключ дұрыс емес",
-                  duration: Duration(seconds: 2),
+      appBar: AppBar(
+        title: const Text("Активация жасау"),
+      ),
+      body: BlocConsumer(
+        bloc: _activationCubit,
+        listener: (_, state) {
+          if (state is InValidaKey) {
+            ScaffoldMessenger.of(context)
+              ..hideCurrentSnackBar()
+              ..showSnackBar(
+                SnackBar(
+                  content: const Text("Ключ дұрыс емес"),
                 ),
               );
-            }
-
-            if (state is ValidActivationKey) {
-              Get.to(ParserScreen());
-            }
-          },
-          builder: (_, state) {
-            if (state is ActivationProgressBar) {
-              return BaseProgressBar();
-            }
-
+          }
+        },
+        builder: (_, state) {
+          if (state is ActivationForm) {
             return ActivationKeyForm(
-              onActivate: (String passedLicenseKey) =>
-                  _activationCubit.activateLicenseKey(passedLicenseKey),
+              licenseRepository: _licenseRepository,
+              onActivate: (String passedLicenseKey) {
+                _activationCubit.checkLicense();
+              },
             );
-          },
-        ),
+          }
+
+          return BaseProgressBar();
+        },
       ),
     );
   }

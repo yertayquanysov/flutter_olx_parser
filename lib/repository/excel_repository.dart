@@ -44,15 +44,17 @@ class ExcelRepository {
   }
 
   Future<bool> save(data) async {
-    final Directory tempDir = await getApplicationDocumentsDirectory();
-    final String tempPath = tempDir.path;
+    try {
+      final Directory tempDir = await getApplicationDocumentsDirectory();
+      final String tempPath = tempDir.path;
 
-    final result = File(tempPath + "/app.xlsx")
-      ..createSync()
-      ..writeAsBytesSync(data);
+      File(tempPath + "/app.xlsx")
+        ..createSync()
+        ..writeAsBytesSync(data);
 
-    print(result);
-
-    return true;
+      return true;
+    } catch (e) {
+      return false;
+    }
   }
 }

@@ -24,7 +24,7 @@ void main() {
           "https://www.olx.kz/kk/obyavlenie/repetitor-russkiy-yazyk-i-matematika-IDjYwlT.html#06f3abb167;promoted",
       "gqOMu":
           "https://www.olx.kz/kk/obyavlenie/repetitor-matematika-fizika-pomosch-na-ent-kta-kurs-repititor-IDgqOMu.html#06f3abb167;promoted",
-      null:
+      "":
           "https://www.olx.kz/kk/obyavlenie/repetitor-matematika-fizika-pomosch-na-ent-kta-kurs-repititor"
     };
 

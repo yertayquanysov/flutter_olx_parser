@@ -38,31 +38,31 @@ class HtmlParserRepository implements IHtmlParserRepository {
 
   @override
   String getCategoryName() {
-    var name = htmlData.getElementsByClassName("offer-path");
+    final name = htmlData.getElementsByClassName("offer-path");
     return name[0].getElementsByTagName("small").first.text.trim();
   }
 
   @override
   String getCityName() {
-    var data = htmlData.getElementsByClassName("bottom-cell");
+    final data = htmlData.getElementsByClassName("bottom-cell");
     return data[0].getElementsByTagName("span").first.text;
   }
 
   @override
   String getPrice() {
-    var data = htmlData.getElementsByClassName("price");
+    final data = htmlData.getElementsByClassName("price");
     return data[0].getElementsByTagName("strong").first.text;
   }
 
   @override
   String getAdsLink() {
-    var data = htmlData.getElementsByTagName("h3");
+    final data = htmlData.getElementsByTagName("h3");
     return data[0].getElementsByTagName("a").first.attributes.values.first;
   }
 
   @override
   String getDate() {
-    var data = htmlData.getElementsByClassName("bottom-cell");
+    final data = htmlData.getElementsByClassName("bottom-cell");
     return data[0].getElementsByTagName("span")[1].text;
   }
 }

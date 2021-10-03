@@ -1,24 +1,43 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:olx_parser/repository/license_repository.dart';
+import 'package:olx_parser/repository/interface/license_repository.dart';
 
-import 'activation_cubit_state.dart';
+abstract class ActivationState {}
+
+class InValidaKey extends ActivationState {}
+
+class ActivationProgressBar extends ActivationState {}
+
+class ActivationException extends ActivationState {
+  final String message;
+
+  ActivationException(this.message);
+}
+
+class ActivationForm extends ActivationState {}
+
+class ValidActivationKey extends ActivationState {}
 
 class ActivationCubit extends Cubit<ActivationState> {
-  final LicenseRepository licenseRepository;
+  LicenseRepository licenseRepository;
 
-  ActivationCubit(this.licenseRepository) : super(ActivationForm());
+  ActivationCubit(this.licenseRepository) : super(ActivationProgressBar());
 
-  void activateLicenseKey(String productKey) async {
+  void activate(String productKey) async {
     try {
       emit(ActivationProgressBar());
+      await Future.delayed(Duration(seconds: 1));
+      emit(InValidaKey());
+      emit(ActivationForm());
+    } catch (e) {
+      emit(ActivationException(e.toString()));
+    }
+  }
 
-      await Future.delayed(Duration(seconds: 2));
-
-      final isValid = await licenseRepository.activateKey(productKey);
-
-      if (isValid) {
-        emit(ValidActivationKey());
-      }
+  void checkLicense() async {
+    try {
+      emit(ActivationProgressBar());
+      await licenseRepository.checkLicenseKey();
+      emit(ActivationForm());
     } catch (e) {
       emit(ActivationException(e.toString()));
     }

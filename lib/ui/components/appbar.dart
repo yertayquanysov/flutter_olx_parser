@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:olx_parser/ui/screens/contact_screen.dart';
 
 class ParserAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
@@ -8,23 +10,16 @@ class ParserAppBar extends StatelessWidget implements PreferredSizeWidget {
       elevation: 3,
       toolbarHeight: 50,
       title: const Text(
-        "OLX парсер - 1.0.0",
+        "OLX парсер | 1",
         style: const TextStyle(color: Colors.white),
       ),
       actions: [
         IconButton(
+          onPressed: () => Get.to(ContactScreen()),
           icon: const Icon(
             Icons.phone,
             color: Colors.white,
           ),
-          onPressed: () => Navigator.pushNamed(context, "contact"),
-        ),
-        IconButton(
-          icon: const Icon(
-            Icons.warning,
-            color: Colors.white,
-          ),
-          onPressed: () => Navigator.pushNamed(context, "warning_info"),
         ),
       ],
     );

@@ -1,42 +1,29 @@
-import 'package:olx_parser/repository/jwt_repository.dart';
-import 'package:olx_parser/repository/local_database_repository.dart';
+import 'package:olx_parser/repository/storage_repository.dart';
+import 'package:platform_device_id/platform_device_id.dart';
 
-abstract class LicenseRepository {
-  Future<bool> checkLicenseKey();
+import 'interface/license_repository.dart';
 
-  Future<bool> activateKey(String licenseKey);
-}
+class LicenseRepositoryImpl extends StorageRepositoryImpl
+    implements LicenseRepository {
 
-class LicenseRepositoryImpl implements LicenseRepository {
-  final _localDatabase = LocalDatabaseRepositoryImpl();
-  final _jwtRepository = JwtRepositoryImpl();
+
+  @override
+  Future<String> getDeviceId() async {
+    try {
+      final String? deviceId = await PlatformDeviceId.getDeviceId;
+      return deviceId!;
+    } catch (e) {
+      return "";
+    }
+  }
 
   @override
   Future<bool> checkLicenseKey() async {
-    final activationKey = await _localDatabase.getSavedKey();
+    final activationKey = await getActivationKey();
 
     if (activationKey.isEmpty) {
       return false;
     }
-
-    if (!_jwtRepository.isValid(activationKey)) {
-      return false;
-    }
-
-    return true;
-  }
-
-  @override
-  Future<bool> activateKey(String licenseKey) async {
-    final isValidKey = _jwtRepository.isValid(licenseKey);
-
-    print(isValidKey);
-
-    if (!isValidKey) {
-      return throw Exception("Ключ дұрыс емес");
-    }
-
-    await _localDatabase.saveKey(licenseKey);
 
     return true;
   }
