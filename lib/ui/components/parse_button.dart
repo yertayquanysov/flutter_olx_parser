@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:superellipse_shape/superellipse_shape.dart';
 
 class ParseButton extends StatelessWidget {
+
   final VoidCallback onTap;
   final String value;
 
