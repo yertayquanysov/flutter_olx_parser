@@ -61,7 +61,7 @@ void main() {
   });
 
   test("get session data", () async {
-    final response = await olx.getSessionData();
-    print(response.headers.keys);
+    /*final response = await olx.getSessionData();
+    print(response.headers.keys);*/
   });
 }
