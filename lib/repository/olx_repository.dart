@@ -5,15 +5,12 @@ import 'package:html/dom.dart';
 import 'package:html/parser.dart';
 import 'package:http/http.dart' as http;
 import 'package:olx_parser/config.dart';
-import 'package:olx_parser/model/cache.dart';
 import 'package:olx_parser/model/parsed_data.dart';
 
-abstract class IOlxRepository {}
-
-class OlxRepository implements IOlxRepository {
-  final List<Cache> cachedData = [];
-
+class OlxRepository {
   final client = http.Client();
+  final List<ParsedData> parsedAdsList = [];
+  late String passedOlxPage;
 
   Future<String> getPageHTML(String url) async {
     final response =
@@ -65,23 +62,25 @@ class OlxRepository implements IOlxRepository {
           .group(0)!
           .replaceAll("ID", "");
     } catch (e) {
-      logger.e("getProductId:" + e.toString());
-
       return "";
     }
   }
 
-  Stream<ParsedData?> getAdsList({
-    required url,
+  void getAdsList({
     required VoidCallback onFinish,
-  }) async* {
-    final String htmlData = await getPageHTML(url);
+  }) async {
+    parsedAdsList.clear();
+
+    logger.w("Parsing started: " + passedOlxPage);
+
+    final String htmlData = await getPageHTML(passedOlxPage);
     final Document document = parse(htmlData);
 
     final adsList = document.getElementsByClassName("offer-wrapper").toList();
 
     for (int a = 0; a < adsList.length; a++) {
-      yield await ParsedData.formDocument(adsList[a]);
+      final data = await ParsedData.fromDocument(adsList[a]);
+      parsedAdsList.add(data);
     }
 
     onFinish();

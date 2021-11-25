@@ -14,8 +14,8 @@ class ActivationScreen extends StatefulWidget {
 }
 
 class _ActivationScreenState extends State<ActivationScreen> {
-  final LicenseRepository _licenseRepository = LicenseRepositoryImpl();
 
+  final LicenseRepository _licenseRepository = LicenseRepositoryImpl();
   late ActivationCubit _activationCubit;
 
   @override

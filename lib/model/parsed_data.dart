@@ -36,7 +36,7 @@ class ParsedData {
     };
   }
 
-  static Future<ParsedData> formDocument(dataHtml.Element data) async {
+  static Future<ParsedData> fromDocument(dataHtml.Element data) async {
     try {
       final _parser = HtmlParserRepository(data);
       final _olxParser = OlxRepository();
@@ -49,7 +49,7 @@ class ParsedData {
         city: _parser.getCityName(),
         date: _parser.getDate(),
         categoryName: _parser.getCategoryName(),
-        phoneNumber: phoneNumber as String,
+        phoneNumber: phoneNumber,
         offerUrl: _parser.getAdsLink(),
       );
     } catch (e) {

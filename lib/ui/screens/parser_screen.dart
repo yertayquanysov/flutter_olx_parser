@@ -1,13 +1,8 @@
-import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:olx_parser/bloc/parser_cubit.dart';
-import 'package:olx_parser/model/parsed_data.dart';
 import 'package:olx_parser/repository/excel_repository.dart';
-import 'package:olx_parser/repository/interface/license_repository.dart';
-import 'package:olx_parser/repository/license_repository.dart';
 import 'package:olx_parser/repository/olx_repository.dart';
 import 'package:olx_parser/ui/components/appbar.dart';
 import 'package:olx_parser/ui/components/parse_button.dart';
@@ -30,7 +25,7 @@ class _HomePageState extends State<ParserScreen> {
   void initState() {
     super.initState();
 
-    _parserCubit = ParserCubit(_olxRepository);
+    _parserCubit = ParserCubit(_olxRepository, _excelRepository);
   }
 
   @override
@@ -56,7 +51,8 @@ class _HomePageState extends State<ParserScreen> {
                   const SizedBox(
                     height: 10,
                   ),
-                  Text("Жиналған хабарландыру саны: 123"),
+                  Text("Жиналған хабарландыру саны: " +
+                      state.parsedAdsCount.toString()),
                 ],
               ),
             );
@@ -67,7 +63,9 @@ class _HomePageState extends State<ParserScreen> {
               children: [
                 MaterialButton(
                   child: const Text("Сохранит в формате  Excel"),
-                  onPressed: () => _parserCubit.export(),
+                  onPressed: () {
+                    _parserCubit.export();
+                  },
                 ),
                 ParseButton(
                   value: 'Жаңадан бастау',
@@ -80,7 +78,9 @@ class _HomePageState extends State<ParserScreen> {
           return Column(
             children: [
               UrlField(
-                onChanged: (v) => {},
+                onChanged: (v) {
+                  _olxRepository.passedOlxPage = v;
+                },
               ),
               const SizedBox(height: 10),
               ParseButton(
