@@ -7,6 +7,7 @@ import 'package:olx_parser/ui/components/activation/activation_key_form.dart';
 import 'package:olx_parser/ui/components/base_progress_bar.dart';
 
 class ActivationScreen extends StatefulWidget {
+
   static String routeName = "activation_screen";
 
   @override

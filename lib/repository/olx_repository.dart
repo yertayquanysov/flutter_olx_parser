@@ -68,10 +68,10 @@ class OlxRepository {
 
   void getAdsList({
     required VoidCallback onFinish,
+    required Function(int count) parsingState,
   }) async {
-    parsedAdsList.clear();
 
-    logger.w("Parsing started: " + passedOlxPage);
+    parsedAdsList.clear();
 
     final String htmlData = await getPageHTML(passedOlxPage);
     final Document document = parse(htmlData);
@@ -81,6 +81,9 @@ class OlxRepository {
     for (int a = 0; a < adsList.length; a++) {
       final data = await ParsedData.fromDocument(adsList[a]);
       parsedAdsList.add(data);
+
+
+      parsingState(parsedAdsList.length);
     }
 
     onFinish();

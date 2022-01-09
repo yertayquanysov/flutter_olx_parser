@@ -28,6 +28,8 @@ class ParserCubit extends Cubit<ParserState> {
 
     _olxRepository.getAdsList(onFinish: () {
       emit(ParsingFinished());
+    }, parsingState: (int count) {
+      emit(ParsingStarted(parsedAdsCount: count));
     });
   }
 

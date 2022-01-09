@@ -16,6 +16,7 @@ class ParserScreen extends StatefulWidget {
 }
 
 class _HomePageState extends State<ParserScreen> {
+
   final OlxRepository _olxRepository = OlxRepository();
   final ExcelRepository _excelRepository = ExcelRepository();
 
@@ -51,8 +52,10 @@ class _HomePageState extends State<ParserScreen> {
                   const SizedBox(
                     height: 10,
                   ),
-                  Text("Жиналған хабарландыру саны: " +
-                      state.parsedAdsCount.toString()),
+                  Text(
+                    "Жиналған хабарландыру саны: " +
+                        state.parsedAdsCount.toString(),
+                  ),
                 ],
               ),
             );
@@ -85,7 +88,11 @@ class _HomePageState extends State<ParserScreen> {
               const SizedBox(height: 10),
               ParseButton(
                 value: 'Номерлерді жинау',
-                onTap: () => _parserCubit.start(),
+                onTap: () {
+                  if (_olxRepository.passedOlxPage.isNotEmpty) {
+                    _parserCubit.start();
+                  }
+                },
               ),
             ],
           );
