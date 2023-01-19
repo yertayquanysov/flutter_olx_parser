@@ -38,12 +38,12 @@ class ExcelRepository {
 
     final encodedData = await excel.encode();
 
-    await save(encodedData);
+    await _save(encodedData);
 
     return true;
   }
 
-  Future<bool> save(data) async {
+  Future<bool> _save(data) async {
     try {
       final Directory tempDir = await getApplicationDocumentsDirectory();
       final String tempPath = tempDir.path;
