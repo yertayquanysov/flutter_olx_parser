@@ -8,11 +8,7 @@ class ExcelRepository {
   Future<bool> exportData(List<ParsedData> parsedData) async {
     final excel = Excel.createExcel();
 
-    await excel.setDefaultSheet("parser");
-
-    var sheetName = await excel.getDefaultSheet();
-
-    var defaultSheet = excel[sheetName];
+    var defaultSheet = excel["parser"];
 
     List<String> dataList = [
       "Имя",
